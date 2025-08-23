@@ -1,69 +1,92 @@
 // CS151 Fall 2025
-// HW1 Project 1: Use a vector to sort numbers
+// HW1 Project 2: Use a vector to sort planets
 // Jack Marriott
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <functional>
 #include <cstdlib>
-#include <ctime>
+#include <string>
+#include <iomanip>
+#include "Planet.h"
 
 using namespace std;
 
-// Generates a random number between 1 and 10
-inline int randNum(void)
-{
-    return 1 + rand() % 10;
-}
-
 int main()
 {
-    vector<int> numbers;
-    vector<int>::iterator it;
-    int value;
-    const int N_ELEMS = 30;
+    vector<string> names = {"Ceres", "Earth", "Eris", "Haumea",
+        "Jupiter", "Makemake", "Mars", "Mercury",
+        "Neptune", "Pluto", "Saturn", "Uranus", "Venus"};
 
-    // seed with current time each run
-    srand(time(0));
+    vector<int> diams = {952, 12756, 2321, 1220,
+        142796, 1475, 6787, 4878, 48600, 2302,
+        120660, 51118, 12104};
+    
+    
+    vector<long long> orbits = {413700000LL, 149600000LL, 10125000000LL, 6452000000LL,
+        778300000LL, 6850000000LL, 227900000LL, 57900000LL, 4497000000LL, 589100000LL,
+        1427000000LL, 2831000000LL, 108200000LL};
 
-    // Sort the vector in descending order
-    // sort(numbers.begin(), numbers.end(), std::greater<int>());
+    // List of ordered planets
+    vector<Planet> planets;
+    vector<Planet>::iterator it;
 
-    // Assign the first element
-    numbers.push_back(randNum());
-
-    // Loop for the additional elements
-    for (int i = 1; i < N_ELEMS; ++i)
+    // Add first planet
+    planets.push_back(Planet(names[0], diams[0], orbits[0]));
+    
+    // Add remaining planets in ascending orbit
+    for (int i = 1; i < names.size(); ++i)
     {
-        value = randNum();
-
-        it = numbers.begin();
-        while (it <= numbers.end())
+        it = planets.begin();
+        bool added = false;
+        while (it < planets.end())
         {
-            if (value >= *it)
+            if (orbits[i] <= it->getDistance())
             {
-                numbers.insert(it, value);
+                planets.insert(it, Planet(names[i], diams[i], orbits[i]));
+                added = true;
                 break;
             }
             ++it;
         }
+        if (!added)
+            planets.insert(it, Planet(names[i], diams[i], orbits[i]));
     }
 
-    // Print to double check descending order
-    cout << "Print in descending order:\n";
-    for (int num : numbers)
-        cout << num << " ";
+    cout << left << setw(8) << "Planet" << " ";
+    cout << right << setw(10) << "Diameter" << " ";
+    cout << right << setw(10) << "Orbit";
+    cout << "\n";
+    cout << left << setw(8) << "Name" << " ";
+    cout << right << setw(10) << "[km/1e3]" << " ";
+    cout << right << setw(10) << "[km/1e6]";
+    cout << "\n";
+    cout << left << setw(8) << "--------" << " ";
+    cout << right << setw(10) << "-------" << " ";
+    cout << right << setw(10) << "--------";
+    cout << "\n";
 
-    cout << "\n\n";
+    it = planets.begin();
+    double totDiam = 0.0, totOrbit = 0.0;
+    double diam, orbit;
 
-    cout << "Print in ascending order:\n";
-    it = numbers.end() - 1;  // the end goes past the last element
-    while (it >= numbers.begin())
+    while (it < planets.end())
     {
-        cout << *it << " ";
-        numbers.pop_back();
-        --it;
+        diam = it->getDiameter()/1e3;totDiam += diam;
+        orbit = it->getDistance()/1e6;totOrbit += orbit;
+        cout << fixed;
+        cout << left << setw(8) << it->getName() << " ";
+        cout << right << setw(10) << setprecision(3) << diam << " ";
+        cout << right << setw(10) << setprecision(1) << orbit << "\n";
+        ++it;
     }
+    cout << left << setw(8) << "--------" << " ";
+    cout << right << setw(10) << "-------" << " ";
+    cout << right << setw(10) << "--------";
+    cout << "\n";
+
+    cout << left << setw(8) << "Totals" << " ";
+    cout << right << setw(10) << totDiam << " ";
+    cout << right << setw(10) << totOrbit;
+    cout << "\n";
 
     cout << "\n\n";
 
