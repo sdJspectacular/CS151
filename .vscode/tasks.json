@@ -7,9 +7,9 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                //"${file}",
-                "${fileDirname}/Planet.cpp",
-                "${fileDirname}/hw1p2.cpp",
+                "${file}",
+                //"${fileDirname}/Planet.cpp",
+                //"${fileDirname}/hw1p2.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
