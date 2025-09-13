@@ -22,6 +22,33 @@
 
 using namespace std;
 
+// Prototypes
+string dec2bin(int val);
+
+int main()
+{
+    string num;
+    int val;
+
+    // Input a value for conversion (Note: no error checking in input data type)
+    // Continue looping asking for conversion values until a negative value is entered
+    do
+    {
+        cout << "Enter a decimal value to convert: ";
+        getline(cin, num);
+        val = stoi(num);
+        if (val >= 0)  // Process positive values
+            cout << dec2bin(val) << "\n";
+        else          // else exit
+            cout << "Stopping\n";
+
+    } while (val >= 0);
+
+    return 0;
+}
+
+// This function will convert an input integer value in decimal and return its
+// equivalent binary value as a string.
 string dec2bin(int val)
 {
     int rem;
@@ -35,28 +62,8 @@ string dec2bin(int val)
         rem = val % 2;
         val -= rem; // not quite necessary in binary because division below will truncate
         val /= 2;
-        result = to_string(rem) + result; // prepend
+        result = to_string(rem) + result; // prepend, because LSB is computed first and MSB last
     }
 
     return result;
-}
-
-int main()
-{
-    string num;
-    int val;
-
-    do
-    {
-        cout << "Enter a decimal value to convert: ";
-        getline(cin, num);
-        val = stoi(num);
-        if (val >= 0)
-            cout << dec2bin(val) << "\n";
-        else
-            cout << "Stopping\n";
-
-    } while (val >= 0);
-
-    return 0;
 }
