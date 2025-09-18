@@ -62,6 +62,7 @@ int main()
     ptr3 = badReturn(); // returns 0x00 if badReturn uses local variables
     cout << "When called again:   " << *ptr3 << endl;
 
+    cout << "\n";
     cout << "Conclusion: cases 1-2 still work with this compiler, g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0.\n"
          << "Per Gemini: Accessing this dangling pointer results in undefined behavior. It is good practice\n"
          << "to set the pointer to nullptr after deletion to prevent this.\n\n";
