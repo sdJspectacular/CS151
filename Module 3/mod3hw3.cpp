@@ -1,3 +1,22 @@
+// CS151 Fall 2025, Dynamic Allocation of an Array
+// Author:   Jack Marriott
+// Module:   3
+// Homework: 3
+// Project:  1
+// Problem Statement: Dynamic memory allocation of a class array
+//
+// Algorithm:
+//   1. Prompt user for number of test scores (one per student)
+//   2. Dynamically allocate student array
+//   3. In lieu of manual entry, assign names and test scores randomly
+//      - Do not accept test scores outside of range [0, 100]
+//      - Use random names that are 4-12 characters long
+//   4. Display the unsorted (name, score) data
+//   5. Pass test score array to a function that sorts the array in ascending order
+//      - Use insertion sort to sort in place
+//   6. Display the sorted (name, score) data
+//   7.  Calculate the average score
+
 #include <iostream>
 #include <cmath>
 #include <iomanip>
@@ -87,7 +106,7 @@ int main()
     do {
         arrPtr[i] = rand() % 100;  // random scores 0-99
 
-        // Input Validation: Do not test scores outside of range [0, 100]
+        // Input Validation: Do not accept test scores outside of range [0, 100]
         if ((arrPtr[i] < 0) || (arrPtr[i] > 100))
             continue;
         
