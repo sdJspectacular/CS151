@@ -1,0 +1,85 @@
+// CS151 Fall 2025, Decimal to Binary Converter
+// Author:   Jack Marriott
+// Module:   4
+// Project:  Display Box
+// Problem Statement: 
+//
+// Algorithm:
+//   1. Blah
+//   2. Blah
+
+#include <iostream>
+#include <iomanip>
+#include <memory>
+#include <random>
+
+using namespace std;
+
+struct Stone {
+    char letter;    // Letter of the stone occupying a slot in the display box (A - J)
+    int attempts;   // Number of attempts it takes to find an available slot for this stone by selecting a slot at random
+    int slot;       // The slot to which the stone is assigned
+    Stone(char ltr, int n, int loc) : letter(ltr), attempts(n), slot(loc) {}
+};
+
+int main()
+{
+    const int kNumberOfStones = 10;
+
+    // 3. Random number generator
+    random_device seed ;  // A random sequence (“seed”) is created based on system clock
+    default_random_engine gen(seed());  // A “generator” is created using default_random_engine and the random sequence rd
+    //default_random_engine gen(8888);
+    uniform_int_distribution<int> slot(0, kNumberOfStones - 1); // The distribution type, low and high range, and returned data type are specified
+    
+    // 4. Create an array of 10 unique pointers to Stone objects
+    unique_ptr<Stone> slots[kNumberOfStones];
+
+    // 5. Create a for loop which processes a single stone (lettered A, B, C... through J)
+    int spot, attempts;
+    char ltr;
+    for (ltr = 'A'; ltr < ('A' + kNumberOfStones); ++ltr)
+    {
+        attempts = 0;
+        // 6. For each stone, use an inner loop
+        do
+        {
+            spot = slot(gen); // 6a.  Generate a random number between 0 and 9
+            ++attempts;  // 6b. Track number of attempts until finding an empty spot
+        } while(slots[spot]!=nullptr);
+
+        slots[spot] = make_unique<Stone>(ltr, attempts, spot);
+
+    }
+
+    // 7. When each of the 10 stones has been placed into its own slot in the display box, print a nicely formatted (columnar) report
+    int tot = 0;
+    cout << "    Report by Slot\n";
+    cout << "Slot" << "  " << "Stone" << "  " << "Attempts\n";
+    cout << "----" << "  " << "-----" << "  " << "--------\n";
+    for (int i = 0; i < kNumberOfStones; ++i)
+    {
+        cout << setw(4) << 1 + slots[i]->slot << "  " << setw(5) << slots[i]->letter << "  " << setw(8) << slots[i]->attempts << "\n";
+        tot += slots[i]->attempts;
+    }
+    cout << "Total Attempts: " << tot << "\n\n";
+
+    // 8. Show the results sorted by the stone's letter.  Do this by adding a new data member to the  Stone  structure for the slot the stone is in
+    tot = 0;
+    cout << "    Report by Stone\n";
+    cout << "Stone" << "  " << "Slot" << "  " << "Attempts\n";
+    cout << "-----" << "  " << "----" << "  " << "--------\n";
+    for (ltr = 'A'; ltr < ('A' + kNumberOfStones); ++ltr)
+    {
+        for (auto &e : slots)
+        {
+            if (e->letter == ltr)
+            {
+                cout << setw(5) << e->letter << "  " << setw(4) << 1 + e->slot << "  " << setw(8) << e->attempts << "\n";
+                tot += e->attempts;
+            }
+        }
+    }
+    cout << "Total Attempts: " << tot << "\n\n";
+    return 0;
+}
