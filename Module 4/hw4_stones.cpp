@@ -2,11 +2,15 @@
 // Author:   Jack Marriott
 // Module:   4
 // Project:  Display Box
-// Problem Statement: 
+// Problem Statement: Demonstrate random number generation and unique pointers
 //
 // Algorithm:
-//   1. Blah
-//   2. Blah
+//   1. Set up random number generator for uniform integer distribution in range 0-9
+//   2. Create an array of 10 unique pointers to Stone objects
+//   3. Randomly assign each stone to an empty slot in a box of 10 slots
+//      - Try repeatedly when the random slot is already taken
+//   4. Display box contents by stone and by slot
+//      - Output is pretty-printed and total attempts tallied
 
 #include <iostream>
 #include <iomanip>
