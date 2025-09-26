@@ -11,6 +11,7 @@
 //      - Try repeatedly when the random slot is already taken
 //   4. Display box contents by stone and by slot
 //      - Output is pretty-printed and total attempts tallied
+//      - Demonstrate how to do insertion sort of Stone list
 
 #include <iostream>
 #include <iomanip>
@@ -25,6 +26,9 @@ struct Stone {
     int slot;       // The slot to which the stone is assigned
     Stone(char ltr, int n, int loc) : letter(ltr), attempts(n), slot(loc) {}
 };
+
+// Sort an Stone list in increasing order
+void insertionSort(unique_ptr<Stone> *slotPtr, int size);
 
 int main()
 {
@@ -68,11 +72,13 @@ int main()
     }
     cout << "Total Attempts: " << tot << "\n\n";
 
-    // 8. Show the results sorted by the stone's letter.  Do this by adding a new data member to the  Stone  structure for the slot the stone is in
+// 8. Show the results sorted by the stone's letter.  Do this by adding a new data member to the  Stone  structure for the slot the stone is in
     tot = 0;
     cout << "    Report by Stone\n";
     cout << "Stone" << "  " << "Slot" << "  " << "Attempts\n";
     cout << "-----" << "  " << "----" << "  " << "--------\n";
+#if 0
+    // This part was removed after initial submission
     for (ltr = 'A'; ltr < ('A' + kNumberOfStones); ++ltr)
     {
         for (auto &e : slots)
@@ -85,5 +91,42 @@ int main()
         }
     }
     cout << "Total Attempts: " << tot << "\n\n";
+#else
+    // This part was added after submission
+    insertionSort(slots, kNumberOfStones);  // call insertion sort
+    for (int i = 0; i < kNumberOfStones; ++i)
+    {
+        cout << setw(5) << slots[i]->letter << "  " << setw(4) << 1 + slots[i]->slot << "  " << setw(8) << slots[i]->attempts << "\n";
+        tot += slots[i]->attempts;
+    }
+    cout << "Total Attempts: " << tot << "\n\n";
+#endif
+
     return 0;
+}
+
+// Sort an Stone list in increasing order
+// This is the insertion sort from module 3, modified to work with 
+// unique pointers and to srt by letter
+void insertionSort(unique_ptr<Stone> *slotPtr, int size)
+{
+
+    // At any i-th element, parse thru subelements [0, ..., i-1] and shift
+    // one place to the right IF the subelement is greater than the i-th element.
+    for (int i = 1; i < size; ++i)
+    {
+        unique_ptr<Stone> val = move(slotPtr[i]);  // this is the i-th element
+        char val_letter = val->letter;
+        int k;
+
+        // parse thru subelements in order [i-1, i-2, ..., 0]
+        for (k = i - 1; k >= 0; --k)
+        {
+            if (val_letter < slotPtr[k]->letter)
+                slotPtr[k + 1] = move(slotPtr[k]); // move greater values to the right
+            else
+                break; // stop because remaining elements are less than
+        }
+        slotPtr[k + 1] = move(val); // set the i-th element where it belongs
+   }
 }
