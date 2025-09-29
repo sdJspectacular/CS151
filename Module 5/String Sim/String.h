@@ -1,6 +1,9 @@
-#include <cstring>
-#pragma once
+#ifndef _STRING_H_
+#define _STRING_H_
 
+#include <cstring>
+
+using namespace std;
 
 class String
 {
@@ -9,16 +12,12 @@ private:
     int size;
 
 public:
-    String(const char *s = ""); // constructor
-    ~String();                  // destructor
-    void change(const char *);  // reassign string
+    String(const char *s = "");        // constructor
+    ~String();                         // destructor
+    void change(const char *);         // reassign string
+    // if this friend function is commented out, the compiler throws this message?
+    //   ‘print’ was not declared in this scope; did you mean ‘printf’?
     friend void print(const String &); // friend function
 };
 
-// Constructor
-String::String(const char *original)
-{
-    size = strlen(original);      // number of chars, not including '\0'
-    string = new char[size + 1];  // create new string, add extra char for '\0'
-    strcpy(string, original);     // copy original --> string, including '\0'
-}
+#endif // _STRING_H_
