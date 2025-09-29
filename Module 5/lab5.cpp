@@ -2,12 +2,15 @@
 // Author:   Jack Marriott
 // Module:   5
 // Lab:  5
+// Project: 1
 // Problem Statement: More about Classes
 //
 // Algorithm:
-//   1.
-//   2.
-//   3.
+//   1. Create a membership roster using a vector with pointers to the member data structure
+//   2. Declare four members and add to vector
+//   3. Drop one member
+//   4. Simulate gym visits for the remaining members
+//   5. Output membership report
 //
 #include <iostream>
 #include <vector>
@@ -71,14 +74,6 @@ int main()
     gymGoers.push_back(charlie);
     gymGoers.push_back(leona);
 
-#if 0
-    // Print membership roster
-    for (auto member : gymGoers)
-    {
-        cout << member->name << "\n";
-    }
-#endif
-
     // 3. Drop the membership for Charlie Sheen
     int idx = 0;
     // use a loop to determine the index of Charlie Sheet in the vector
@@ -94,14 +89,6 @@ int main()
         }
         idx++;
     }
-
-#if 0
-    // Print membership roster
-    for (auto member : gymGoers)
-    {
-        cout << member->name << "\n";
-    }
-#endif
 
     // 4. Generate random visits for each of the remaining members
     random_device seed ;  // A random sequence (“seed”) is created based on system clock
@@ -120,9 +107,17 @@ int main()
 
     // 5. Pretty-print a columnar report
     cout << "\n";
+    cout << setw(35) << right << "Gym Membership Report" << "\n\n";
+    cout << setw(10) << left << "ID No." << setw(18) << left << "Member Name" << setw(8) << "Visits";
+    cout << setw(10) << "Type" << setw(6) << "Rate";
+    cout << "\n";
+    cout << setw(10) << left << "~~~~~~" << setw(18) << left << "~~~~~~~~~~~~~~~" << setw(8) << "~~~~~~";
+    cout << setw(10) << "~~~~~~" << setw(6) << "~~~~";
+    cout << "\n";
+
     for (Member *goerPtr : gymGoers)
     {
-        cout << setw(10) << left << goerPtr->id << setw(18) << left << goerPtr->name << setw(6) << goerPtr->visits;
+        cout << setw(10) << left << goerPtr->id << setw(18) << left << goerPtr->name << setw(8) << goerPtr->visits;
         if (goerPtr->type == 'B')
         {
             cout << setw(10) << "Basic" << fixed << setprecision(2) << setw(6) << BASIC_RATE;
@@ -136,6 +131,8 @@ int main()
 
     // 6. At the bottom of the report, use the static variables to show the
     //    total visit for the gym and the number of active members (should be 3)
+    cout << "\nTotal Visits:   " << Member::total_visits << "\n";
+    cout << "Active Members: " << Member::active_members << "\n\n";
 
     // Memory cleanup, because cleanliness is godliness
     for (auto member : gymGoers)
