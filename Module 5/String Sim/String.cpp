@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstring>
 
+#if 1
 // Constructor
 String::String(const char *s)
 {
@@ -9,6 +10,7 @@ String::String(const char *s)
     string = new char[size + 1]; // create new string, add extra char for '\0'
     strcpy(string, s);    // copy original --> string, including '\0'
 }
+#endif
 
 // Copy Constructor to create a deep copy of the character array
 String::String(const String &original)

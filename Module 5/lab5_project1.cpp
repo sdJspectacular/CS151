@@ -117,14 +117,14 @@ int main()
 
     for (Member *goerPtr : gymGoers)
     {
-        cout << setw(10) << left << goerPtr->id << setw(18) << left << goerPtr->name << setw(8) << goerPtr->visits;
+        cout << setw(10) << left << goerPtr->id << setw(18) << left << goerPtr->name << setw(6) << right << goerPtr->visits << "  ";
         if (goerPtr->type == 'B')
         {
-            cout << setw(10) << "Basic" << fixed << setprecision(2) << setw(6) << BASIC_RATE;
+            cout << setw(10) << left << "Basic" << fixed << setprecision(2) << setw(6) << BASIC_RATE;
         }
         else
         {
-            cout << setw(10) << "Premium" << fixed << setprecision(2) << setw(6) << PREMIUM_RATE;
+            cout << setw(10) << left << "Premium" << fixed << setprecision(2) << setw(6) << PREMIUM_RATE;
         }
         cout << "\n";
     }
