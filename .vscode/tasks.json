@@ -8,8 +8,8 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 //"${file}",
-                "${fileDirname}/Numbers.cpp",
-                "${fileDirname}/hw5_project1.cpp",
+                "${fileDirname}/String.cpp",
+                "${fileDirname}/lab5_project2.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

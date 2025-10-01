@@ -11,7 +11,7 @@ private:
 
 public:
     String(const char *s = ""); // constructor
-    String(const String &);     // copy constructor
+    String(const String &);       // copy constructor
     ~String();                  // destructor
     void change(const char *);  // reassign string
     // if this friend function is commented out, the compiler throws this message?
@@ -25,14 +25,12 @@ public:
 // Library (strlen  and  strcpy).  Please include a comment above each function you enter
 // below, so I know what each one does:
 
-#if 0
-// Placing constructor here will produce an error at compile time
-String::String(const char *original)
+// Constructor
+String::String(const char *s)
 {
-    size = strlen(original);
+    size = strlen(s);
     string = new char[size + 1];
-    strcpy(string, original);
+    strcpy(string, s);
 }
-#endif
 
 #endif // _STRING_H_

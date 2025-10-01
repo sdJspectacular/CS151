@@ -2,22 +2,12 @@
 #include <iostream>
 #include <cstring>
 
-#if 1
-// Constructor
-String::String(const char *s)
-{
-    size = strlen(s);     // number of chars, not including '\0'
-    string = new char[size + 1]; // create new string, add extra char for '\0'
-    strcpy(string, s);    // copy original --> string, including '\0'
-}
-#endif
-
 // Copy Constructor to create a deep copy of the character array
-String::String(const String &original)
+String::String(const String &rhs)
 {
-    size = original.size;
+    size = rhs.size;
     string = new char[size + 1];
-    strcpy(string, original.string);
+    strcpy(string, rhs.string);
 }
 
 // change function replaces the current string or characters with a new string
