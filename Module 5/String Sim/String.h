@@ -11,7 +11,7 @@ private:
 
 public:
     String(const char *s = ""); // constructor
-    String(const String &);       // copy constructor
+    String(const String &rhs);       // copy constructor
     ~String();                  // destructor
     void change(const char *);  // reassign string
     // if this friend function is commented out, the compiler throws this message?

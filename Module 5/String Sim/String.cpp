@@ -1,6 +1,7 @@
 #include "String.h"
 #include <iostream>
 #include <cstring>
+#include <string>
 
 // Copy Constructor to create a deep copy of the character array
 String::String(const String &rhs)
