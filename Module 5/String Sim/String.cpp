@@ -15,7 +15,7 @@ String::String(const char *s)
 String::String(const String &rhs)
 {
     size = rhs.size;
-    string = new char[size + 1];
+    string = new char[size + 1];  // add 1 for the null terminator
     strcpy(string, rhs.string);
 }
 
