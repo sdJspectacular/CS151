@@ -20,11 +20,4 @@ public:
     friend void print(const String &); // friend function
 };
 
-String::String(const char *s)
-{
-    size = strlen(s);
-    string = new char[size + 1]; // add 1 for the null terminator
-    strcpy(string, s);
-}
-
 #endif // _STRING_H_

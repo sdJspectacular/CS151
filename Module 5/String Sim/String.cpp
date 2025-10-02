@@ -3,6 +3,14 @@
 #include <cstring>
 #include <string>
 
+// Regular constructor
+String::String(const char *s)
+{
+    size = strlen(s);
+    string = new char[size + 1]; // add 1 for the null terminator
+    strcpy(string, s);
+}
+
 // Copy Constructor to create a deep copy of the character array
 String::String(const String &rhs)
 {
