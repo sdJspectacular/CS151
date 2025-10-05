@@ -12,14 +12,14 @@
 //      - without input argument
 //   3. Demonstrate assignment operator
 //   4. Demonstrate copy constructor
-//      
-//      - shallow copy
-//      - double free (as Program 11-7 in the book warns)
-//   3. Add copy constructor, demonstrate:
-//      - deep copy
-//      - no double free run-time error
-//
+//   5. Demonstrate prefix ++
+//   6. Demonstrate postfix ++
+//   7. Demonstrate operator+
+//   8. Demonstrate operator[]
+//   9. Demonstrate ++ and opeartor[]
+
 #include <iostream>
+#include <iomanip>
 #include "EString.h"
 
 using namespace std;
@@ -37,17 +37,44 @@ int main()
          << "Second string:  " << estring2 << "\n"
          << "Third string :  " << estring3 << "\n\n";
 
-    cout << "estring1 : " << ++estring1 << "\n";
-    cout << "estring2 : " << estring2++ << "\n";
-    cout << "estring2 : " << estring2 << "\n";
+    EString testStr1 = "New Year's Party at 8:30.";
+    EString testStr2 = "Be at my house at 5:00 PM";
 
-    cout << estring3[1] << "\n";
+    // Demonstrate prefix operator
+    cout << "Original string:         " << setw(30) << right << testStr1 << "\n";
+    cout << "Using prefix operator:   " << setw(30) << right << ++testStr1 << "\n";
+    cout << "After using prefix:      " << setw(30) << right << testStr1 << "\n";
 
-    estring1[1] = estring1[2] = estring1[3];
+    // Demonstrate postfix operator
+    cout << "\n";
+    cout << "Original string:         " << setw(30) << right << testStr2 << "\n";
+    cout << "Using postfix operator:  " << setw(30) << right << testStr2++ << "\n";
+    cout << "After using postfix:     " << setw(30) << right << testStr2 << "\n";
+   
+    // Demonstrate operator+
+    EString testStr3;
+    testStr3 = testStr1 + " " + testStr2;
+    cout << "\n" << testStr3 << "\n\n";
 
-    cout << estring1 << "\n";
+    // 4. On a single line of output, use a loop and the overloaded [] to extract
+    // each character in one of the  EString  objects and print each character
+    // separated by a space. 
+    int i = 0;
+    cout << "Original: ";
+    while (testStr1[i++])
+        cout << testStr1[i-1] << " ";
 
-    cout << estring2 + estring3 << "\n";
-    
+    cout << "\n";
+
+    // Again using both the overloaded ++ and [  ] operators, make another loop
+    // to increment each character's value using the same EString object and print
+    // that character.  Again separate characters with a space.
+    i = 0;
+    cout << "Updated:  ";
+    while (testStr1[i++])
+        cout << ++testStr1[i-1] << " ";
+
+    cout << "\n\n";
+
     return 0;
 }

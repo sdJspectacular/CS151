@@ -83,7 +83,7 @@ EString EString::operator++(int)
 // indexing operator
 char &EString::operator[](int idx)
 {
-    if ((idx >= this->size) || (idx < 0))
+    if ((idx > this->size) || (idx < 0))
     {
         // If the index of the parameter is less than 0 or greater than
         // the size of the string, then print an error message and stop
