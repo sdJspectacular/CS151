@@ -8,8 +8,8 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 //"${file}",
-                "${fileDirname}/EString.cpp",
-                "${fileDirname}/mod6_proj1.cpp",
+                "${fileDirname}/Money.cpp",
+                "${fileDirname}/mod6_proj2.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

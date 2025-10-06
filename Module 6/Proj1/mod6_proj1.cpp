@@ -16,7 +16,7 @@
 //   6. Demonstrate postfix ++
 //   7. Demonstrate operator+
 //   8. Demonstrate operator[]
-//   9. Demonstrate ++ and opeartor[]
+//   9. Demonstrate ++ and operator[]
 
 #include <iostream>
 #include <iomanip>
