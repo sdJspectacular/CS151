@@ -1,50 +1,17 @@
-#ifndef _DAY_OF_YEAR_
-#define _DAY_OF_YEAR_
 #include <iostream>
 #include <string>
+#include "DayOfYear.h"
 
 using namespace std;
 
-class DayOfYear
-{
-private:
-    int dayNum; // 1 - 365
+int DayOfYear::months = 12;
 
-    //
-    static string monthNames[];
-    static int daysPerMonth[];
-    static int months;
-
-public:
-    // Constructor
-    DayOfYear(int day) : dayNum(day)
-    {
-        // Check for valid day
-        if ((dayNum < 1) || (dayNum > 365))
-        {
-            cout << "Invalid day of year error\n";
-            exit(1);
-        }
-    }
-
-    // Accessor function
-    int getDayNum() const
-    {
-        return dayNum;
-    }
-
-    // operator<<
-    friend std::ostream &operator<<(std::ostream &, const DayOfYear &);
-};
-
-int months = 12;
-
-string monthNames[] = {"January", "February", "March",
+string DayOfYear::monthNames[] = {"January", "February", "March",
                                   "April", "May", "June",
                                   "July", "August", "September",
                                   "October", "November", "December"};
 
-int daysPerMonth[] = {
+int DayOfYear::daysPerMonth[] = {
     31, 28, 31,
     30, 31, 30,
     31, 31, 30,
@@ -79,5 +46,3 @@ ostream &operator<<(std::ostream &out, const DayOfYear &day)
     out << DayOfYear::monthNames[monthIndex] << " " << remainingDay;
     return out;
 }
-
-#endif // _DAY_OF_YEAR_
