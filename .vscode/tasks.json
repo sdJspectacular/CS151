@@ -8,9 +8,8 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 //"${file}",
-                "${fileDirname}/mod6_proj3.cpp",
-                "${fileDirname}/Event.cpp",
-                "${fileDirname}/TimeDate.cpp",
+                "${fileDirname}/hw6_proj1.cpp",
+                "${fileDirname}/DayOfYear.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
