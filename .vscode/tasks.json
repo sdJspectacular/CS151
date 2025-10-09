@@ -7,9 +7,9 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                //"${file}",
-                "${fileDirname}/hw6_proj1.cpp",
-                "${fileDirname}/DayOfYear.cpp",
+                "${file}",
+                //"${fileDirname}/hw6_proj1.cpp",
+                //"${fileDirname}/DayOfYear.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
