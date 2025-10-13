@@ -47,10 +47,15 @@ public:
     // **** Complete these constructors using initialization lists **** /
 
     // full constructor
-    PersonAtMCC(long long id, string name, string address, string phone) {}
+    PersonAtMCC(long long id, string name, string address, string phone) : id(id), name(name), address(address), phone(phone) 
+    {
+    }
 
     // copy constructor
-    PersonAtMCC(const PersonAtMCC &copy) {}
+    PersonAtMCC(const PersonAtMCC &copy) : PersonAtMCC(copy.id, "Copy of " + copy.name, copy.address, copy.phone)
+    {
+
+    }
 
     // getters
     long long getId() const

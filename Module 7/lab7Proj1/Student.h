@@ -26,7 +26,7 @@ using namespace std;
 
 /*** Make this class a child of PersonAtMCC with public access ***/
 
-class Student
+class Student : public PersonAtMCC
 {
 
 private:
@@ -41,10 +41,18 @@ public:
     // full constructor
     Student(long long id, string name, string address, string phone,
             string major, int credits_received,
-            bool applied_to_4_year, bool is_veteran) {}
+            bool applied_to_4_year, bool is_veteran) : 
+            PersonAtMCC(id, name, address, phone),
+            major(major), credits_received(credits_received),
+            applied_to_4_year(applied_to_4_year), is_veteran(is_veteran)
+            {
+            }
 
     // copy constructor
-    Student(const Student &copy) {}
+    Student(const Student &copy) : PersonAtMCC(copy), major(copy.major),
+    credits_received(copy.credits_received), applied_to_4_year(copy.applied_to_4_year), is_veteran(copy.is_veteran)
+    {
+    }
 
     // getters
     string getMajor() const
@@ -87,6 +95,15 @@ public:
     // display the student's info on the screen
     void showInfo()
     {
-        cout << "ID: " << getId() << endl;
+        // major;
+        // credits_received;
+        // applied_to_4_year;
+        // is_veteran;
+        PersonAtMCC::showInfo();
+        cout << "    Major: " << getMajor() << 
+                "  Credits: " << getCreditsReceived() <<
+                "   4-year: " << (applied_to_4_year? "yes" : "no") <<
+                "  Veteran? " << (is_veteran? "yes" : "no") << "\n\n";
+
     }
 };

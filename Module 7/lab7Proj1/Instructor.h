@@ -20,11 +20,12 @@
 #pragma once
 
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 /*** Make this class a child of PersonAtMCC with public access ***/
 
-class Instructor
+class Instructor : public PersonAtMCC
 {
 
 private:
@@ -38,10 +39,18 @@ public:
 
     // full constructor
     Instructor(long long id, string name, string address, string phone,
-               string department, bool is_permanent, double pay_rate, double hours) {}
+               string department, bool is_permanent, double pay_rate, double hours) : 
+               PersonAtMCC(id, name, address, phone),
+               department(department), is_permanent(is_permanent), pay_rate(pay_rate),
+               hours(hours)
+    {
+    }
 
     // copy constructor
-    Instructor(const Instructor &copy) {}
+    Instructor(const Instructor &copy) : PersonAtMCC(copy), department(copy.department), is_permanent(copy.is_permanent),
+    pay_rate(copy.pay_rate), hours(copy.hours)
+    {
+    }
 
     // getters for this class
     string getDepartment() const
@@ -84,6 +93,14 @@ public:
     // Display the instructor's info on the screen
     void showInfo()
     {
-        cout << "ID: " << getId() << endl;
+        // department;
+        // is_permanent;
+        // pay_rate;
+        // hours;
+        PersonAtMCC::showInfo();
+        cout << "    Department: " << getDepartment() <<
+                "    Permanent?: " << (is_permanent? "yes" : "no") << setprecision(2) << fixed << 
+                "      Pay Rate: " << pay_rate <<
+                "         Hours: " << hours << "\n\n";
     }
 };

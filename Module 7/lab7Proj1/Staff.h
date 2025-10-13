@@ -25,7 +25,7 @@ using namespace std;
 
 /**** Make this class a child of PersonAtMCC with public access ****/
 
-class Staff
+class Staff : public PersonAtMCC
 {
 
 private:
@@ -37,11 +37,17 @@ public:
     /**** Complete these constructors using initialization lists ****/
 
     // full constructor
-    Staff(long long id, string address, string name, string phone,
-          string extension, string hire_date, double pay_rate) {}
+    Staff(long long id, string name, string address, string phone,
+          string extension, string hire_date, double pay_rate) :
+          PersonAtMCC(id, name, address, phone),
+          extension(extension), hire_date(hire_date), pay_rate(pay_rate)
+          {
+          }
 
     // copy constructor
-    Staff(const Staff &copy) {}
+    Staff(const Staff &copy) : PersonAtMCC(copy),  extension(copy.extension), hire_date(copy.hire_date), pay_rate(copy.pay_rate)
+    {
+    }
 
     // getters
     string getExtension() const
@@ -62,10 +68,12 @@ public:
     {
         this->extension = extension;
     }
+
     void setHireDate(string hire_date)
     {
         this->hire_date = hire_date;
     }
+
     void setPayRate(double pay_rate)
     {
         this->pay_rate = pay_rate;
@@ -76,6 +84,12 @@ public:
     // Display the staff member's info on the screen
     void showInfo()
     {
-        cout << "ID: " << getId() << endl;
+        // extension;
+        // hire_date;
+        // pay_rate;
+        PersonAtMCC::showInfo();
+        cout << "    Extension: " << getExtension() <<
+                "    Hire Date: " << getHireDate() <<
+                "     Pay Rate: " << getPayRate() << "\n\n";
     }
 };

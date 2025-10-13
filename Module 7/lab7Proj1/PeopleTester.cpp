@@ -91,8 +91,10 @@ int main()
 
     // Use only the base class version of showInfo for Ms. Earhart
     cout << "*** USE BASE CLASS SHOWINFO FOR MS. EARHART ***" << endl;
-    // ?? amelia ???
+    amelia->PersonAtMCC::showInfo();
 
+    cout << "\n";
+    
     delete amelia;
     delete amelia_copy;
     delete professor_ellen;
