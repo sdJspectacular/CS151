@@ -22,54 +22,71 @@
 #pragma once
 
 #include <iostream>
-using namespace std ;
+using namespace std;
 
-         /*** Make this class a child of PersonAtMCC with public access ***/
+/*** Make this class a child of PersonAtMCC with public access ***/
 
-class Student {
+class Student
+{
 
-    private :
-        string major ;
-        int credits_received ;
-        bool applied_to_4_year ;
-        bool is_veteran ;
+private:
+    string major;
+    int credits_received;
+    bool applied_to_4_year;
+    bool is_veteran;
 
-    public :
+public:
+    /**** Complete these constructors using initialization lists. ****/
 
-        /**** Complete these constructors using initialization lists. ****/
+    // full constructor
+    Student(long long id, string name, string address, string phone,
+            string major, int credits_received,
+            bool applied_to_4_year, bool is_veteran) {}
 
-        // full constructor
-        Student(long long id, string name, string address, string phone,
-                    string major, int credits_received,
-                    bool applied_to_4_year, bool is_veteran) { }
+    // copy constructor
+    Student(const Student &copy) {}
 
-        // copy constructor
-        Student(const Student &copy) { }
+    // getters
+    string getMajor() const
+    {
+        return major;
+    }
+    int getCreditsReceived() const
+    {
+        return credits_received;
+    }
+    bool getAppliedTo4Year() const
+    {
+        return applied_to_4_year;
+    }
+    bool getIsVeteran() const
+    {
+        return is_veteran;
+    }
 
-        // getters
-        string getMajor() const
-            { return major ; }
-        int getCreditsReceived() const
-            { return credits_received ; }
-        bool getAppliedTo4Year() const
-            { return applied_to_4_year ; }
-        bool getIsVeteran() const
-            { return is_veteran ; }
+    // setters
+    void setMajor(string major)
+    {
+        this->major = major;
+    }
+    void setCreditsReceived(int credits)
+    {
+        credits_received = credits;
+    }
+    void setAppliedTo4Year(bool applied)
+    {
+        applied_to_4_year = applied;
+    }
+    void setIsVeteran(bool is_veteran)
+    {
+        this->is_veteran = is_veteran;
+    }
 
-        // setters
-        void setMajor(string major)
-            { this->major = major ; }
-        void setCreditsReceived(int credits)
-            { credits_received = credits ; }
-        void setAppliedTo4Year(bool applied)
-            { applied_to_4_year = applied ; }
-        void setIsVeteran(bool is_veteran)
-            { this->is_veteran = is_veteran ; }
+    /**** Complete this function ****/
 
-        /**** Complete this function ****/
-
-        // display the student's info on the screen
-        void showInfo() {
-            cout << "ID: " << getId() << endl ;
-        }
-} ;
+    // display the student's info on the screen
+    void showInfo()
+    {
+        cout << "ID: " << getId() << endl;
+    }
+};

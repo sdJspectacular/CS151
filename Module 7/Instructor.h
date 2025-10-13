@@ -20,53 +20,70 @@
 #pragma once
 
 #include <iostream>
-using namespace std ;
+using namespace std;
 
-         /*** Make this class a child of PersonAtMCC with public access ***/
+/*** Make this class a child of PersonAtMCC with public access ***/
 
-class Instructor {
+class Instructor
+{
 
-    private :
-        string department ;
-        bool is_permanent ;
-        double pay_rate ;
-        double hours ;
+private:
+    string department;
+    bool is_permanent;
+    double pay_rate;
+    double hours;
 
-    public :
+public:
+    /**** Complete these constructors using initialization lists ****/
 
-        /**** Complete these constructors using initialization lists ****/
+    // full constructor
+    Instructor(long long id, string name, string address, string phone,
+               string department, bool is_permanent, double pay_rate, double hours) {}
 
-        // full constructor
-        Instructor(long long id, string name, string address, string phone,
-               string department, bool is_permanent, double pay_rate, double hours) { }
+    // copy constructor
+    Instructor(const Instructor &copy) {}
 
-        // copy constructor
-        Instructor(const Instructor &copy) { }
+    // getters for this class
+    string getDepartment() const
+    {
+        return department;
+    }
+    bool getIsPermanent() const
+    {
+        return is_permanent;
+    }
+    double getPayRate() const
+    {
+        return pay_rate;
+    }
+    double getHours() const
+    {
+        return hours;
+    }
 
-        // getters for this class
-        string getDepartment() const
-            { return department ; }
-        bool getIsPermanent() const
-            { return is_permanent ; }
-        double getPayRate() const
-            { return pay_rate ; }
-        double getHours() const
-            { return hours ; }
+    // setters for this class only
+    void setDepartment(string department)
+    {
+        this->department = department;
+    }
+    void setIsPermanent(bool is_permanent)
+    {
+        this->is_permanent = is_permanent;
+    }
+    void setPayRate(double pay_rate)
+    {
+        this->pay_rate = pay_rate;
+    }
+    void setHours(double hours)
+    {
+        this->hours = hours;
+    }
 
-        // setters for this class only
-        void setDepartment(string department)
-            { this->department = department ; }
-        void setIsPermanent(bool is_permanent)
-            { this->is_permanent = is_permanent ; }
-        void setPayRate(double pay_rate)
-            { this->pay_rate = pay_rate ; }
-        void setHours(double hours)
-            { this->hours = hours ; }
+    /**** Complete this function ****/
 
-        /**** Complete this function ****/
-
-        // Display the instructor's info on the screen
-        void showInfo() {
-            cout << "ID: " << getId() << endl ;
-        }
-} ;
+    // Display the instructor's info on the screen
+    void showInfo()
+    {
+        cout << "ID: " << getId() << endl;
+    }
+};

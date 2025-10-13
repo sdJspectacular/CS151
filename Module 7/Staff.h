@@ -21,49 +21,61 @@
 #pragma once
 
 #include <iostream>
-using namespace std ;
+using namespace std;
 
-         /**** Make this class a child of PersonAtMCC with public access ****/
+/**** Make this class a child of PersonAtMCC with public access ****/
 
-class Staff {
+class Staff
+{
 
-    private :
-        string extension ;
-        string hire_date ;
-        double pay_rate ;
+private:
+    string extension;
+    string hire_date;
+    double pay_rate;
 
-    public :
+public:
+    /**** Complete these constructors using initialization lists ****/
 
-        /**** Complete these constructors using initialization lists ****/
+    // full constructor
+    Staff(long long id, string address, string name, string phone,
+          string extension, string hire_date, double pay_rate) {}
 
-        // full constructor
-        Staff(long long id, string address, string name, string phone,
-                   string extension, string hire_date, double pay_rate) { }
+    // copy constructor
+    Staff(const Staff &copy) {}
 
-        // copy constructor
-        Staff(const Staff &copy) { }
+    // getters
+    string getExtension() const
+    {
+        return extension;
+    }
+    string getHireDate() const
+    {
+        return hire_date;
+    }
+    double getPayRate() const
+    {
+        return pay_rate;
+    }
 
-        // getters
-        string getExtension() const
-            { return extension ; }
-        string getHireDate() const
-            { return hire_date ; }
-        double getPayRate() const
-            { return pay_rate ; }
+    // setters
+    void setExtension(string extension)
+    {
+        this->extension = extension;
+    }
+    void setHireDate(string hire_date)
+    {
+        this->hire_date = hire_date;
+    }
+    void setPayRate(double pay_rate)
+    {
+        this->pay_rate = pay_rate;
+    }
 
-        // setters
-        void setExtension(string extension)
-            { this->extension = extension ; }
-        void setHireDate(string hire_date)
-            { this->hire_date = hire_date ; }
-        void setPayRate(double pay_rate)
-            { this->pay_rate = pay_rate ; }
+    /**** Complete this function ****/
 
-        /**** Complete this function ****/
-
-        // Display the staff member's info on the screen
-        void showInfo() {
-             cout << "ID: " << getId() << endl ;
-        }
-} ;
-
+    // Display the staff member's info on the screen
+    void showInfo()
+    {
+        cout << "ID: " << getId() << endl;
+    }
+};

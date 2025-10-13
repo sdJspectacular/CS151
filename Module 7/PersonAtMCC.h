@@ -22,59 +22,78 @@
 #pragma once
 
 #include <iostream>
-using namespace std ;
+using namespace std;
 
-class PersonAtMCC {
+class PersonAtMCC
+{
 
-    private :
-        long long id ;
-        string name ;
-        string address ;
-        string phone ;
+private:
+    long long id;
+    string name;
+    string address;
+    string phone;
 
-    public :
+public:
+    PersonAtMCC()
+    {
+        PersonAtMCC(0, "no name yet", "no address yet", "no phone yet");
+    }
 
-        PersonAtMCC() {
-            PersonAtMCC(0, "no name yet", "no address yet", "no phone yet") ;
-        }
+    PersonAtMCC(long long id, string name)
+    {
+        PersonAtMCC(id, name, "no address yet", "no phone yet");
+    }
 
-        PersonAtMCC(long long id, string name) {
-            PersonAtMCC(id, name, "no address yet", "no phone yet") ;
-        }
+    // **** Complete these constructors using initialization lists **** /
 
-        // **** Complete these constructors using initialization lists **** /
+    // full constructor
+    PersonAtMCC(long long id, string name, string address, string phone) {}
 
-        // full constructor
-        PersonAtMCC(long long id, string name, string address, string phone) { }
+    // copy constructor
+    PersonAtMCC(const PersonAtMCC &copy) {}
 
-        // copy constructor
-        PersonAtMCC(const PersonAtMCC &copy) { }
+    // getters
+    long long getId() const
+    {
+        return id;
+    }
+    string getName() const
+    {
+        return name;
+    }
+    string getAddress() const
+    {
+        return address;
+    }
+    string getPhone() const
+    {
+        return phone;
+    }
 
-        // getters
-        long long getId() const
-            {  return id ; }
-        string getName() const
-            { return name ; }
-        string getAddress() const
-            { return address ; }
-        string getPhone() const
-            { return phone ; }
+    // setters
+    void setId(long long id)
+    {
+        this->id = id;
+    }
+    void setName(string name)
+    {
+        this->name = name;
+    }
+    void setAddress(string address)
+    {
+        this->address = address;
+    }
+    void setPhone(string phone)
+    {
+        this->phone = phone;
+    }
 
-        // setters
-        void setId(long long id)
-            { this->id = id ; }
-        void setName(string name)
-            { this->name = name ; }
-        void setAddress(string address)
-            { this->address = address ; }
-        void setPhone(string phone)
-            { this->phone = phone ; }
-
-        // show person's info on the screen
-        void showInfo() {
-            cout << "ID: " << id
-                 << "  Name: " << name
-                 << "  Address: " << address << endl
-                 << "    Phone: " << phone << endl ;
-        }
-} ;
+    // show person's info on the screen
+    void showInfo()
+    {
+        cout << "ID: " << id
+             << "  Name: " << name
+             << "  Address: " << address << endl
+             << "    Phone: " << phone << endl;
+    }
+};
