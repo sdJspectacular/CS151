@@ -1,5 +1,5 @@
 /* PersonAtMCC.h - The parent class of Instructor, Student, and Staff
- * Author:     <your name>
+ * Author:     Jack Marriott
  * Module:     7
  * Project:    Lab, Part 1
  * Description:

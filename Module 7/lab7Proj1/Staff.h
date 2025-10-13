@@ -1,5 +1,5 @@
 /* Staff.h - Header for staff members at MCC
- * Author:     <your name>
+ * Author:     Jack Marriott
  * Module:     7
  * Project:    Lab
  * Description:

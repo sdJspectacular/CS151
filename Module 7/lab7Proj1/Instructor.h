@@ -1,5 +1,5 @@
 /* Instructor.h - Class describing an Instructor at MiraCosta.
- * Author:     <your name>
+ * Author:     Jack Marriott
  * Module:     7
  * Project:    Lab, Part 1
  * Description:
