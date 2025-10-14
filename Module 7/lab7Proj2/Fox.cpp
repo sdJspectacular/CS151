@@ -1,3 +1,9 @@
+// CS151 Fall 2025
+// Author:   Jack Marriott
+// Module:   7
+// Lab:  7
+// Project: 2
+// Problem Statement: Fox class
 #include "Fox.h"
 #include <iostream>
 #include <string>

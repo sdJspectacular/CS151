@@ -1,3 +1,9 @@
+// CS151 Fall 2025
+// Author:   Jack Marriott
+// Module:   7
+// Lab:  7
+// Project: 2
+// Problem Statement: Owl class
 #include "Owl.h"
 #include <iostream>
 #include <string>
@@ -25,4 +31,3 @@ string Owl::getBreed(void) const
 {
     return this->breed;
 }
-

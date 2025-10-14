@@ -1,3 +1,9 @@
+// CS151 Fall 2025
+// Author:   Jack Marriott
+// Module:   7
+// Lab:  7
+// Project: 2
+// Problem Statement: Fox class
 #ifndef _FOX_
 #define _FOX_
 
@@ -11,23 +17,22 @@ using namespace std;
 class Fox : public Animal
 {
 private:
-// has no data members
+    // has no data members
 
 public:
-// has a single constructor which takes one parameter, 
-// a string used to set the data member of its parent (use member initialization list),
-// then prints a message
-Fox(string name) : Animal(name)
-{
-    cout << "A Fox " << getName() << " has been created.\n";
-}
+    // has a single constructor which takes one parameter,
+    // a string used to set the data member of its parent (use member initialization list),
+    // then prints a message
+    Fox(string name) : Animal(name)
+    {
+        cout << "A Fox " << getName() << " has been created.\n";
+    }
 
-// Has a read-only no-argument function named makeNoise which prints the message
-void makeNoise(void) const;
+    // Has a read-only no-argument function named makeNoise which prints the message
+    void makeNoise(void) const;
 
-// another read-only showInfo function which prints a message
-void showInfo(void) const;
-
+    // another read-only showInfo function which prints a message
+    void showInfo(void) const;
 };
 
 #endif

@@ -1,3 +1,9 @@
+// CS151 Fall 2025
+// Author:   Jack Marriott
+// Module:   7
+// Lab:  7
+// Project: 2
+// Problem Statement: Animal class
 #ifndef _ANIMAL_
 #define _ANIMAL_
 
@@ -13,7 +19,6 @@ private:
     string name;
 
 public:
-
     // A single constructor which takes one parameter (a string) used to set the
     // data member by using a member initialization list, then prints the message
     Animal(string name) : name(name)
