@@ -20,6 +20,30 @@
 
 using namespace std;
 
+// answers to the following review questions for Project #2
+// 1. What is/are the names of the base classes?
+//      The base class is Animal
+//
+// 2. What is/are the names of the derived classes?
+//      The derived classes are Fox and Owl
+//
+// 3. Does  Animal  have a parent class?
+//      Animal does not have a parent class
+//
+// 4. Is the function  showInfo  overridden?  Is  makeNoise?  Is  sleep?
+//      showInfo() is overriden in both Fox and Owl
+//      makeNoise() is overriden in both Fox and Owl
+//      sleep() is not overriden by either derived class
+//
+// 5. If the data member name in the Animal class were made protected (instead of private), 
+//    would you need to use getters in the showInfo function of the child classes Fox and Owl?
+//      No
+//
+// 6. What if the class data members were left private, but the base access modifiers to the Animal
+//    class in both child classes were made protected, would you need to use getters in the showInfo
+//    function of the child classes Fox and Owl? 
+//      Yes
+
 int main()
 {
     // creates an Animal object with a name “Oscar”

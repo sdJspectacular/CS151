@@ -15,6 +15,7 @@ using namespace std;
 
 // The Fox class is a child of the  Animal  class
 class Fox : public Animal
+//class Fox : protected Animal
 {
 private:
     // has no data members

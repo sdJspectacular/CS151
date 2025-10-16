@@ -20,6 +20,7 @@ void Owl::makeNoise(void) const
 void Owl::showInfo(void) const
 {
     cout << "The Owl " << getName() << " of breed " << getBreed() << "\n";
+    //cout << "The Owl " << name << " of breed " << getBreed() << "\n";
 }
 
 void Owl::setBreed(string breed)

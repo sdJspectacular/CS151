@@ -20,4 +20,5 @@ void Fox::makeNoise(void) const
 void Fox::showInfo(void) const
 {
     cout << "The Fox " << getName() << "\n";
+    //cout << "The Fox " << name << "\n";
 }

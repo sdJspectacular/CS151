@@ -15,6 +15,7 @@ using namespace std;
 class Animal
 {
 private:
+//protected:
     // The Animal class has one data member, a private string variable named name
     string name;
 

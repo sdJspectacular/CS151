@@ -15,6 +15,7 @@ using namespace std;
 
 // The Owl class is a child of the  Animal  class
 class Owl : public Animal
+//class Owl : protected Animal
 {
 private:
     // has one data member, a  private string named  breed.

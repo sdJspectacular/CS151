@@ -29,7 +29,7 @@ bool PString::isPalindrome(void)
         c1 = tolower(*it1); 
         c2 = tolower(*it2);
 
-        // Not a palindrome if any character comparison is not the same
+        // Not a palindrome if any character comparison fails
         if (c1 != c2) return false;
         
         ++it1;
