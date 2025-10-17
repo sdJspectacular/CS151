@@ -1,3 +1,8 @@
+/* PString.cpp - Homework 7, project 1
+ * Author:     Jack Marriott
+ * Module:     1
+ * Problem statement:  Palindrome string class derived from std::string
+ */
 #include "PString.h"
 #include <iostream>
 #include <cctype>

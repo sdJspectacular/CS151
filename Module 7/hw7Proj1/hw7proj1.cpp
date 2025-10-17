@@ -1,3 +1,12 @@
+/* hw7proj1.cpp - Homework 7, project 1
+ * Author:     Jack Marriott
+ * Module:     7
+ * Problem statement:  Palindrom string class derived from std::string
+ *
+ * Algorithm:
+ *   1.  Create the palindrome string class
+ *   2.  Determine whether each test word is a palindrome
+ */
 #include "PString.h"
 #include <iostream>
 #include <string>

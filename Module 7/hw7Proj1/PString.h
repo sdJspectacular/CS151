@@ -1,3 +1,8 @@
+/* PString.h - Homework 7, project 1
+ * Author:     Jack Marriott
+ * Module:     1
+ * Problem statement:  Palindrome string class derived from std::string
+ */
 #ifndef _PALINDROME_
 #define _PALINDROME_
 
@@ -13,9 +18,13 @@ private:
     std::string phrase;
 
 public:
-    // A constructor that takes a  string  object (or a C-string)  as a parameter and
+    // A constructor that takes a  string as a parameter and
     // passes it to the  string  (base class) constructor
     PString(std::string word) : phrase(word) {}
+
+    // A constructor that takes a C-string  as a parameter and
+    // passes it to the  string  (base class) constructor
+    PString(const char* cword) : phrase(cword) {}
 
     // A member function which determines whether the string is a palindrome
     bool isPalindrome(void);
