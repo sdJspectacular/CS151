@@ -1,20 +1,3 @@
-/* Inheritance.cpp - Create a Person / Teacher hierarchy of classes (Midterm)
- * Author:     <your name>
- * Module:     10
- * Project:    Midterm Problem 4
- * Problem statement: Create a Person class parent to a Teacher class.
- *     The Person class has data members profession (string) and age (int).  The
- *     profession data member is actually a pointer to a string in the heap (free store).
- *
- *   * Data member access is protected in Person
- *     -- getters and setters are provided for data members to allow access by other
- *        classes.
- *   * Base class access for Teacher is public
- *
- *   In this project, complete the constructor, copy constructor, assignment operator,
- *   setters, and destructor in the Person class.
- */
-
 #include <iostream>
 using namespace std ;
 
