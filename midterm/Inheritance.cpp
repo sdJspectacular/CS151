@@ -29,44 +29,51 @@ class Person {
         Person(string profession, int age) {
             // cout << "In constructor for " << profession << endl ;
 
-                    // Complete this function
+            this->profession = new string(profession);
+            this->age = age;
         }
 
         // Assignment operator
         Person & operator=(const Person &right) {
             // cout << "In the assignment operator copying: " << *right.profession << endl ;
 
-                    // Complete this function
+            if (this != &right)
+            {
+                delete this->profession;
+                this->profession = new string(*right.profession);
+                this->age = right.age;
+            }
+            return *this;
         }
 
         // Copy constructor
         Person(Person &copy) {
             // cout << "In copy constructor for " << *copy.profession << endl ;
 
-                    // Complete this function
+            this->age = copy.age;
+            this->profession = new string(*copy.profession);
         }
 
         // Getters and setters
         string getProfession() const {
-            return string(*profession) ;
+            return *profession;
         }
         int getAge() const {
             return age ;
         }
         void setProfession(string profession) {
-
-                    // Complete this function
+            delete this->profession;
+            this->profession = new string(profession);
         }
         void setAge(int age) {
-
-                    // Complete this function
+            this->age = age;
         }
 
         // Destructor
         ~Person() {
-            cout << "Deleting Person:  " << *profession << endl ;
+            // cout << "Deleting Person:  " << *profession << endl ;
 
-                    // Complete this function
+            delete profession;
         }
 } ;
 
