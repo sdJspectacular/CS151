@@ -14,6 +14,7 @@
  *   3.  This loop encrypts each phrase as follows:
  *       - call encryption function on each character one at a time
  *       - use a lambda function that calls the encryption function
+ *   4.  Demostrate each input string as single and double encrypted
  */
 #include <iostream>
 #include <algorithm>
@@ -61,7 +62,16 @@ int main()
                      encrypt(c); // our function defined below
                  });
 
-        cout << "Encrypted: " << message << "\n";
+        cout << "Encrypted once: " << message << "\n";
+
+        // encrypt a second time
+        for_each(message.begin(), message.end(),
+                 [](char &c)
+                 {
+                     encrypt(c); // our function defined below
+                 });
+
+        cout << "Encrypted twice: " << message << "\n\n";
     }
 
     return 0;
