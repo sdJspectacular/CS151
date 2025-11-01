@@ -17,6 +17,7 @@
 using namespace std;
 
 int wordCounter(const char *str);
+char lastChar(const char *str);
 
 int main()
 {
@@ -60,4 +61,22 @@ int wordCounter(const char *str)
     }
 
     return j;
+}
+
+// Find the last character before the end of line
+// Note: the last char could be a space
+// Note: could be done with strlen
+char lastChar(const char *str)
+{
+
+    int i = 0;
+    while (str[i] != '\0')
+    {
+        // Walk through all characters until finding EOL
+        i++;
+    }
+
+    i -= 1; // walk back EOL character
+    cout << str[i] << "\n";
+    return str[i];
 }
