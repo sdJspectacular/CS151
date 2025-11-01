@@ -5,10 +5,14 @@
  * Problem statement:  Count the number of words in a C-string
  *
  * Algorithm:
- *   1. Write encryption function that  takes a C-string 
- *      as an argument and returns the number of words contained in the C-string.
+ *   1. Write encryption function that  takes a C-string as an argument,
+ *      and returns the number of words contained in the C-string.
  *   2. This function counts words, where a word is a set of characters between spaces
  *   3. Use C library functions
+ *   4. Check each string in a single pass
+ *      - define a word as anything between chars, e.g. " . " is a word
+ *      - increase the word counter after each word
+ *      - also increase at the end of the string, since '\0' is not a blank
  *   4. Test with C-strings using leading blanks, multi blanks, final blanks, empty strings
  */
 #include <iostream>

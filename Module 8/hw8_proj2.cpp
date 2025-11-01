@@ -10,7 +10,9 @@
  *      - each password should contains at least one uppercase and at least one lowercase letter
  *      - each password should have at least one digit
  *      - each password cannot contain any blanks
- *   2. Test with some test cases
+ *   2. Have single function to test each case and set a bit according
+ *      to the results from that case
+ *   2. Test with some test passwords
  *   3. Request user input until user quits
  */
 #include <iostream>
@@ -32,10 +34,10 @@ int main()
     string line;
     string testCases[] = {"psswd",
                           "",
-                          "Nowisthe time",
-                          "foralltheyoungmen",
-                          "tocometotheaid0f",
-                          "their country...."};
+                          "OLIVIA",
+                          "12345",
+                          "Pass  9",
+                          "Mannix12"};
 
     // Check all my test cases
     for (int i = 0; i < 6; ++i)
@@ -61,31 +63,37 @@ void checkPassword(string password)
     cout << "Password: " << password << "\n";
     checks = checkCriteria(password.c_str());
 
+    // check bit0 for error
     if (!(checks & 0x01))
         cout << "Error: Too short\n";
 
+    // check bit1 for error
     if (!(checks & 0x02))
         cout << "Error: Does not pass upper/lower case criteria\n";
 
+    // check bit2 for error
     if (!(checks & 0x04))
         cout << "Error: Needs at least 1 digit\n";
 
+    // check bit3 for error
     if (!(checks & 0x08))
         cout << "Error: Contains blank space\n";
 
+    // this is the case of everything passes
     if (checks == 0x0F)
         cout << "This password is good!\n";
 
     cout << "\n";
 }
 
-// Check each criteria, set a bit when each is passed
+// Function to check all criteria, one at a time.
+// A bit is set when each is passed.  
 u_int8_t checkCriteria(const char *passwd)
 {
-    return (checkLen(passwd) +
-            2 * checkCase(passwd) +
-            4 * checkDigit(passwd) +
-            8 * checkBlank(passwd));
+    return (checkLen(passwd) +          // sets bit0, 1 = passed, 0 = failed
+            2 * checkCase(passwd) +     // sets bit1, 1 = passed, 0 = failed
+            4 * checkDigit(passwd) +    // sets bit2, 1 = passed, 0 = failed
+            8 * checkBlank(passwd));    // sets bit3, 1 = passed, 0 = failed
 }
 
 // Check if string length is at least 6 characters of any type
@@ -105,23 +113,26 @@ bool checkCase(const char *str)
     // Walk through all characters until finding EOL
     while (str[i] != '\0')
     {
+        // When find an upper case letter, don't check
+        // for upper case again
         if (isupper(str[i]) && !foundUpper)
         {
-            // Found an upper case letter, skip the rest
             foundUpper = true;
         }
 
+        // When find a lower case letter, don't check
+        // for lower case again
         if (!isupper(str[i]) && !foundLower)
         {
-            // Found a lower case letter, skip the rest
             foundLower = true;
         }
 
-        // Found both, skip the rest
+        // Found both, skip the rest because the
+        // test is now conclusive
         if (foundLower && foundUpper)
             break;
 
-        i++;
+        i++; // advance to next char
     }
 
     return (foundLower && foundUpper);
@@ -139,10 +150,11 @@ bool checkDigit(const char *str)
         if (isdigit(str[i]))
         {
             // Found a digit, skip the rest
+            // because the test is now conclusive
             foundDigit = true;
             break;
         }
-        i++;
+        i++; // advance to next char
     }
 
     return foundDigit;
@@ -160,11 +172,14 @@ bool checkBlank(const char *str)
         if (isspace(str[i]))
         {
             // Found a space, skip the rest
+            // because test is now conclusive
             foundSpace = true;
             break;
         }
-        i++;
+        i++; // advance to next char
     }
 
+    // Invert result, because good result is when
+    // there is no space
     return !foundSpace;
 }
