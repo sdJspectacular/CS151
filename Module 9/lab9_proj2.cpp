@@ -2,13 +2,17 @@
  * Author:     Jack Marriott
  * Module:     9
  * Project:    Lab, Project 2
- * Problem statement:  Multiply numbers in a binary file
+ * Problem statement:  Multiply and replace numbers in a binary file
  *
  * Algorithm:
  *   1. Create a binary file for input/output
  *      - exit with error code 1 if the file can't be accessed
- *   2. Write the integers 1 - 10 to the file
- *   3. Write the doubles sqrt(j), where j is 1 - 10, to the file
+ *   2. Ask user for a multiplier
+ *   3. Read the first 10 integers, multiplying each value times
+ *      the multiplier (rounded), and using this value to replace the read value.
+ *   4. Read the remaining 10 doubles, multiplying each value times
+ *      the multiplier (not rounded), and using this value to replace the read value.
+ *   5. Use seekg and seekp to manipulate file to position to read from and write to
  *   4. Close the file
  */
 #include <iostream>
@@ -128,7 +132,7 @@ int main()
     }
 
     cout << "\n";
-    
+
     // Step 6:  Close the file and exit
     data_file.close();
 
