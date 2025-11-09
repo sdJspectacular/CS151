@@ -136,7 +136,7 @@ int main()
         {
         case 1:
             cout << "\n........Adding Record........\n";
-            addNewRecord(inventory);
+            addNewRecord(inventory, -1);
             break;
         case 2:
             cout << "\n......Displaying Record......\n";
@@ -161,7 +161,6 @@ int main()
     {
         // Seek end of file before writing new items
         data_file.seekp(0, ios::end);
-
 
         for (int i = old_records; i < new_records; ++i)
         {
@@ -194,7 +193,7 @@ int main()
 
     // Just for debug check, display the modified file
     displaySavedFile(fname);
-    
+
     return 0;
 }
 
@@ -215,6 +214,7 @@ void displaySavedFile(string fname)
         cout << "\n...Displaying All Records....\n";
         item_t temp_item;
         int idx = 0;
+        
         while (in_file.read(reinterpret_cast<char *>(&temp_item), sizeof(item_t)))
         {   
             cout << "\n  Item number : " << idx << "\n";
@@ -267,6 +267,7 @@ void modRecord(vector<item_t> *inventory, vector<int> *mod_record)
     mod_record->push_back(idx);
 
     // Modify the record
+    cout << "\n";
     addNewRecord(inventory, idx);
 }
 
