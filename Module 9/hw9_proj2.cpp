@@ -29,10 +29,10 @@ struct item_t
     item_t(const char *tdescr, const int tqty, const double tcost, const double tprice, const char *tdate) : qty(tqty), cost(tcost), price(tprice)
     {
         strncpy(description, tdescr, NCHARS - 1);
-        description[NCHARS] = '\0';
+        description[NCHARS - 1] = '\0';
 
         strncpy(dateAdded, tdate, NCHARS - 1);
-        dateAdded[NCHARS] = '\0';
+        dateAdded[NCHARS - 1] = '\0';
     }
 
     // Also need a default constructor
@@ -48,20 +48,35 @@ int main()
     // If the inventory file doesn't exist, create one when first running
     // your program
 
-    fstream data_file(fname, ios::binary | ios::in | ios::out);
+    ifstream in_file(fname, ios::binary);
+    bool file_good = in_file.good();
+    in_file.close();
 
-    if (!data_file.good())
+    if (!file_good)
     {
+        cout << "Input file not found, creating one...\n";
+
         items.push_back(item_t{"Item A", 10, 10.50, 14.99, "25-Dec-2024"});
         items.push_back(item_t{"Item B", 100, 0.99, 2.99, "25-Dec-2024"});
         items.push_back(item_t{"Item C", 50, 4.09, 7.67, "25-Dec-2024"});
+
+        ofstream data_file(fname, ios::binary);
+
+        if (!data_file)
+        {
+            cout << "ERROR: could not open " << fname << "\n";
+            exit(1);
+        }
+
         for (const auto &it : items)
         {
             data_file.write(reinterpret_cast<const char *>(&it), sizeof(item_t));
         }
+
+        data_file.close();
     }
 
-    data_file.close();
+
 
     return 0;
 }
