@@ -53,6 +53,7 @@ struct item_t
 void addNewRecord(vector<item_t> *inventory, int idx);
 void displayRecord(vector<item_t> *inventory);
 void modRecord(vector<item_t> *inventory, vector<int> *mod_record);
+void displaySavedFile(string fname);
 
 int main()
 {
@@ -94,7 +95,7 @@ int main()
         cout << "\nInput file found\n\n";
 
     // Load the inventory file
-    fstream data_file(fname, ios::binary | ios::in | ios::out | ios::app);
+    fstream data_file(fname, ios::binary | ios::in | ios::out);
     if (!data_file)
     {
         cout << "ERROR: could not open " << fname << "\n";
@@ -158,6 +159,10 @@ int main()
     int new_records = inventory->size();
     if (new_records > old_records) // check to see if new records were added
     {
+        // Seek end of file before writing new items
+        data_file.seekp(0, ios::end);
+
+
         for (int i = old_records; i < new_records; ++i)
         {
             item_t &it = inventory->at(i);
@@ -173,7 +178,7 @@ int main()
         int idx = mod_records->at(i);
         if (idx < old_records)
         {
-            item_t &it = inventory->at(i);
+            item_t &it = inventory->at(idx);
             position = idx * sizeof(item_t);
             data_file.seekp(position);  
             data_file.write(reinterpret_cast<char *>(&it), sizeof(item_t));
@@ -188,6 +193,38 @@ int main()
     data_file.close();
 
     return 0;
+}
+
+// For debug purposes, display the saved file
+void displaySavedFile(string fname)
+{
+    // Check to see if there is an input file
+    ifstream in_file(fname, ios::binary);
+    bool file_good = in_file.good();
+
+    // Check to see if the file exists
+    if (!file_good)
+    {
+        cout << "\nERROR: Input file not found.\n\n";
+    }
+    else
+    {
+        cout << "\n...Displaying All Records....\n";
+        item_t temp_item;
+        int idx = 0;
+        while (in_file.read(reinterpret_cast<char *>(&temp_item), sizeof(item_t)))
+        {   
+            cout << "\n  Item number : " << idx << "\n";
+            cout << "  Description : " << temp_item.description << "\n";
+            cout << "   Date Added : " << temp_item.dateAdded << "\n";
+            cout << "     Quantity : " << temp_item.qty << "\n";
+            cout << "         Cost : $" << temp_item.cost << "\n";
+            cout << "        Price : $" << temp_item.price << "\n";
+            ++idx;
+        }
+    }
+
+    in_file.close();
 }
 
 // Modify a record
@@ -306,26 +343,20 @@ void addNewRecord(vector<item_t> *inventory, int idx = -1)
     double price;
 
     cout << "Provide item description: ";
-    cin.getline(descr, NCHARS);
+    getline(cin, line);
     // Check if the input exceeded size limit
     // only using the first 80 chars
     // If user makes a mistake, they'll have to modify the record
-    if (cin.fail())
-    {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
+    strncpy(descr, line.c_str(), NCHARS - 1);
+    descr[NCHARS - 1] = '\0';
 
     cout << "Provide date added: ";
-    cin.getline(date, NCHARS);
+    getline(cin, line);
     // Check if the input exceeded size limit
     // only using the first 80 chars
     // If user makes a mistake, they'll have to modify the record
-    if (cin.fail())
-    {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
+    strncpy(date, line.c_str(), NCHARS - 1);
+    date[NCHARS - 1] = '\0';
 
     cout << "Enter quantity: ";
     getline(cin, line);
