@@ -1,7 +1,7 @@
 /* hw9_proj2.cpp - Inventory Item
  * Author:     Jack Marriott
  * Module:     9
- * Project:    HW, Project 2
+ * Project:    HW, Project 3
  * Problem statement:  Handle inventory data in a binary file
  *
  * Algorithm:
