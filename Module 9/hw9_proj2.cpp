@@ -192,6 +192,9 @@ int main()
     // Close file
     data_file.close();
 
+    // Just for debug check, display the modified file
+    displaySavedFile(fname);
+    
     return 0;
 }
 
