@@ -50,8 +50,9 @@ struct item_t
     item_t() = default;
 };
 
-void addNewRecord(vector<item_t> *inventory);
+void addNewRecord(vector<item_t> *inventory, int idx);
 void displayRecord(vector<item_t> *inventory);
+void modRecord(vector<item_t> *inventory, vector<int> *mod_record);
 
 int main()
 {
@@ -115,6 +116,7 @@ int main()
 
     bool done = false;
     int old_records = inventory->size();
+    vector<int> *mod_records = new vector<int>;
     while (!done)
     {
         string line;
@@ -122,7 +124,8 @@ int main()
         cout << "\nEnter a selection:\n";
         cout << "\t1 to add a new record\n";
         cout << "\t2 to display any record\n";
-        cout << "\t3 to quit the program\n";
+        cout << "\t3 to modify any record\n";
+        cout << "\t4 to quit the program\n";
         cout << ">> ";
         getline(cin, line);
         stringstream ss(line);
@@ -139,6 +142,10 @@ int main()
             displayRecord(inventory);
             break;
         case 3:
+            cout << "\n.......Modifying Record......\n";
+            modRecord(inventory, mod_records);
+            break;
+        case 4:
             done = true;
             break;
         default:
@@ -147,9 +154,9 @@ int main()
         }
     }
 
-    // Write new records to file
+    // Write new items to end of file
     int new_records = inventory->size();
-    if (new_records > old_records)  // check to see if new records were added
+    if (new_records > old_records) // check to see if new records were added
     {
         for (int i = old_records; i < new_records; ++i)
         {
@@ -158,13 +165,69 @@ int main()
         }
     }
 
+    long long position;
+    // Update existing items
+    for (int i = 0; i < mod_records->size(); ++i)
+    {
+        // Only update items that were not already written as part of new items
+        int idx = mod_records->at(i);
+        if (idx < old_records)
+        {
+            item_t &it = inventory->at(i);
+            position = idx * sizeof(item_t);
+            data_file.seekp(position);  
+            data_file.write(reinterpret_cast<char *>(&it), sizeof(item_t));
+        }
+    }
+
     // Deallocate memory
     delete inventory;
+    delete mod_records;
 
     // Close file
     data_file.close();
 
     return 0;
+}
+
+// Modify a record
+void modRecord(vector<item_t> *inventory, vector<int> *mod_record)
+{
+    string line;
+    int n = inventory->size();
+    int idx = n + 1;
+
+    while (true)
+    {
+        cout << "\nSelect item to modify 0 .. " << (n - 1) << "\n";
+        cout << ">> ";
+        getline(cin, line);
+        {
+            stringstream ss(line);
+            ss >> idx;
+        }
+
+        if ((0 <= idx) && (idx < n)) // Display single item
+        {
+            cout << "\n  Item number : " << idx << "\n";
+            cout << "  Description : " << inventory->at(idx).description << "\n";
+            cout << "   Date Added : " << inventory->at(idx).dateAdded << "\n";
+            cout << "     Quantity : " << inventory->at(idx).qty << "\n";
+            cout << "         Cost : $" << inventory->at(idx).cost << "\n";
+            cout << "        Price : $" << inventory->at(idx).price << "\n";
+            break;
+        }
+        else // User selected out-of-bounds element
+        {
+            cout << "\nThat item does not exist, try again.\n";
+        }
+    }
+
+    // Keep track of the index of the item to modify
+    mod_record->push_back(idx);
+
+    // Modify the record
+    addNewRecord(inventory, idx);
 }
 
 // Display either a single record (user choice), or all records randomly
@@ -184,7 +247,7 @@ void displayRecord(vector<item_t> *inventory)
             ss >> idx;
         }
 
-        if ((0 <= idx) && (idx < n))   // Display single item
+        if ((0 <= idx) && (idx < n)) // Display single item
         {
             cout << "\n  Item number : " << idx << "\n";
             cout << "  Description : " << inventory->at(idx).description << "\n";
@@ -224,7 +287,7 @@ void displayRecord(vector<item_t> *inventory)
             }
             break;
         }
-        else    // User selected out-of-bounds element
+        else // User selected out-of-bounds element
         {
             cout << "\nThat item does not exist, try again.\n";
         }
@@ -233,7 +296,7 @@ void displayRecord(vector<item_t> *inventory)
 
 // Add a new item to the inventory
 // Does not add to file immediately, this is handled later
-void addNewRecord(vector<item_t> *inventory)
+void addNewRecord(vector<item_t> *inventory, int idx = -1)
 {
     string line;
     char descr[NCHARS];
@@ -285,7 +348,16 @@ void addNewRecord(vector<item_t> *inventory)
         ss >> price;
     }
 
-    // Add the record to the array (not to the file just yet)
-    inventory->push_back(item_t(descr, qty, cost, price, date));
-    cout << "\nNew record added: " << descr << "\n\n";
+    if (idx == -1)
+    {
+        // Add the record to the end of the list
+        inventory->push_back(item_t(descr, qty, cost, price, date));
+        cout << "\nNew record added: " << descr << "\n\n";
+    }
+    else
+    {
+        // Add the record at a specific position in the list
+        inventory->at(idx) = item_t(descr, qty, cost, price, date);
+        cout << "\nNew record added: " << descr << "\n\n";
+    }
 }
