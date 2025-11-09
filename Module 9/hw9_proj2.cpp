@@ -13,6 +13,9 @@
 #include <vector>
 #include <cstring>
 #include <limits>
+#include <algorithm>
+#include <random>
+#include <chrono>
 
 using namespace std;
 
@@ -47,7 +50,8 @@ struct item_t
     item_t() = default;
 };
 
-void addNewRecord(vector<item_t> *);
+void addNewRecord(vector<item_t> *inventory);
+void displayRecord(vector<item_t> *inventory);
 
 int main()
 {
@@ -97,7 +101,7 @@ int main()
     }
 
     // Assign all items to a vector
-    vector<item_t> *inventory;
+    vector<item_t> *inventory = new vector<item_t>();
     item_t temp_item;
     while (data_file.read(reinterpret_cast<char *>(&temp_item), sizeof(item_t)))
     {
@@ -110,11 +114,12 @@ int main()
     // * quit the program
 
     bool done = false;
+    int old_records = inventory->size();
     while (!done)
     {
         string line;
         int choice;
-        cout << "Enter a selection:\n";
+        cout << "\nEnter a selection:\n";
         cout << "\t1 to add a new record\n";
         cout << "\t2 to display any record\n";
         cout << "\t3 to quit the program\n";
@@ -126,12 +131,12 @@ int main()
         switch (choice)
         {
         case 1:
-            // addNewRecord();
-            cout << "adding record....\n";
+            cout << "\n........Adding Record........\n";
+            addNewRecord(inventory);
             break;
         case 2:
-            // displayRecord();
-            cout << "displaying record...\n";
+            cout << "\n......Displaying Record......\n";
+            displayRecord(inventory);
             break;
         case 3:
             done = true;
@@ -142,16 +147,19 @@ int main()
         }
     }
 
-    // Demonstrate the functionality of your program by entering at least 3 items and
-    // then displaying them individually on the console in a random order
-    // (not sequential).
+    // Write new records to file
+    int new_records = inventory->size();
+    if (new_records > old_records)  // check to see if new records were added
+    {
+        for (int i = old_records; i < new_records; ++i)
+        {
+            item_t &it = inventory->at(i);
+            data_file.write(reinterpret_cast<char *>(&it), sizeof(item_t));
+        }
+    }
 
-    // Also demonstrate what happens when the user tries to display an items which
-    // doesn't exist in the data file (out-of-bounds).
-
-    // TODO:
-    //   add new records to file
-    //.  modify any records to file
+    // Deallocate memory
+    delete inventory;
 
     // Close file
     data_file.close();
@@ -159,7 +167,72 @@ int main()
     return 0;
 }
 
+// Display either a single record (user choice), or all records randomly
+void displayRecord(vector<item_t> *inventory)
+{
+    string line;
+    int n = inventory->size();
+    int idx = n + 1;
+
+    while (true)
+    {
+        cout << "\nSelect inventory index 0 .. " << (n - 1) << ", or -1 for all\n";
+        cout << ">> ";
+        getline(cin, line);
+        {
+            stringstream ss(line);
+            ss >> idx;
+        }
+
+        if ((0 <= idx) && (idx < n))   // Display single item
+        {
+            cout << "\n  Item number : " << idx << "\n";
+            cout << "  Description : " << inventory->at(idx).description << "\n";
+            cout << "   Date Added : " << inventory->at(idx).dateAdded << "\n";
+            cout << "     Quantity : " << inventory->at(idx).qty << "\n";
+            cout << "         Cost : $" << inventory->at(idx).cost << "\n";
+            cout << "        Price : $" << inventory->at(idx).price << "\n";
+            break;
+        }
+        else if (idx == -1) // Display all items in random order
+        {
+            // Will need a vector of indices into the inventory
+            vector<int> rand_idx;
+
+            // Initialize 0 .. N
+            for (int i = 0; i < inventory->size(); ++i)
+            {
+                rand_idx.push_back(i);
+            }
+
+            // Use the current time as a random seed
+            unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+            default_random_engine generator(seed);
+
+            // Shuffle the inventory copy
+            shuffle(rand_idx.begin(), rand_idx.end(), generator);
+
+            // Display the shuffled list
+            for (auto &it : rand_idx)
+            {
+                cout << "\n  Item number : " << it << "\n";
+                cout << "  Description : " << inventory->at(it).description << "\n";
+                cout << "   Date Added : " << inventory->at(it).dateAdded << "\n";
+                cout << "     Quantity : " << inventory->at(it).qty << "\n";
+                cout << "         Cost : $" << inventory->at(it).cost << "\n";
+                cout << "        Price : $" << inventory->at(it).price << "\n";
+            }
+            break;
+        }
+        else    // User selected out-of-bounds element
+        {
+            cout << "\nThat item does not exist, try again.\n";
+        }
+    }
+}
+
 // Add a new item to the inventory
+// Does not add to file immediately, this is handled later
 void addNewRecord(vector<item_t> *inventory)
 {
     string line;
@@ -214,5 +287,5 @@ void addNewRecord(vector<item_t> *inventory)
 
     // Add the record to the array (not to the file just yet)
     inventory->push_back(item_t(descr, qty, cost, price, date));
-    cout << "New record added: " << descr << "\n";
+    cout << "\nNew record added: " << descr << "\n\n";
 }
