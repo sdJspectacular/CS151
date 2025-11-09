@@ -5,7 +5,30 @@
  * Problem statement:  Handle inventory data in a binary file
  *
  * Algorithm:
- *   1.
+ *   1. Create a structure for inventory items, containing
+ *      - description (c-string), 80 chars max
+ *      - quantity (int), >= 0
+ *      - cost (double), >= 0
+ *      - price (double), >= 0
+ *      - dateAdded (c-string), 80 chars max
+ *      - use a constructor
+ *   2. Run inventory management program, check to see if an inventory file exists
+ *      - if no file exists, create one with 3 items
+ *      - all files in this program shall be binary
+ *   3. Load all the existing items into a vector called inventory
+ *   4. Display a user driven menu with the following options:
+ *      - add a new record
+ *      - display any record (including all records at once)
+ *      - modify any record
+ *   5. When user adds or modifies a record
+ *      - update the inventory vector immediately
+ *      - do not update the file until the user exits
+ *   6. When the user exits
+ *      - first add new records to the end of the file
+ *      - then add modified records in their corresponding place
+ *   7. Close all files and de-allocate memory
+ *   8. Write a separate function called at the end that
+ *      - opens the newly updated file and displays all contents
  */
 #include <iostream>
 #include <fstream>
@@ -109,6 +132,9 @@ int main()
     {
         inventory->push_back(temp_item);
     }
+
+    // Reset EOF from the read
+    data_file.clear();
 
     // The program should have a menu that allows the user to perform the following tasks:
     // * add new records to the file
@@ -214,7 +240,7 @@ void displaySavedFile(string fname)
         cout << "\n...Displaying All Records....\n";
         item_t temp_item;
         int idx = 0;
-        
+
         while (in_file.read(reinterpret_cast<char *>(&temp_item), sizeof(item_t)))
         {   
             cout << "\n  Item number : " << idx << "\n";
