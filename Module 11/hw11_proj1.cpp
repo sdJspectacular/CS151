@@ -15,7 +15,7 @@
 
 using namespace std;
 
-long double factorial(int val);
+long long factorial(int val);
 
 int main()
 {
@@ -42,9 +42,9 @@ int main()
     return 0;
 }
 
-long double factorial(int val)
+long long factorial(int val)
 {
-    long double prod = 1;
+    long long prod = 1;
 
     // Make sure that your answer doesn't go negative or is too small to make sense
     if (val <= 0)

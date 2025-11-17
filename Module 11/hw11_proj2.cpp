@@ -6,12 +6,12 @@
  *
  * Algorithm:
  *   1. Write a function using recursive binary search to find an element in an ordered array
- *      - base case: check mid point in array, stop if found
- *      - check remaining upper half if mid point is lower than search value
- *      - check remaining lower half if mid point is less than or equal to search value
- *   2. Write a wrapper function that uses binary search to check if a value is a member of an array
- *      - Only arguments are the array, it's size, and the value to search for
- *   3. Allow user to input an array and values to search for, returning true if found and false otherwise
+ *      - function is O(n)
+ *      - check each character one at a time, starting from last
+ *      - base case: the character is found, return true
+ *      - base case: the whole array is searched and character is not found, return false
+ *      - check remaining lower characters, reducing the search index each time
+ *   2. Allow user to input an array and values to search for, returning true if found and false otherwise
  */
 #include <iostream>
 #include <sstream>
@@ -75,6 +75,8 @@ int main()
         }
     }
 
+    cout << "\n";
+
     return 0;
 }
 
@@ -109,10 +111,19 @@ int binarySearch(const int array[], int first, int last, int value)
 }
 
 // Check to see if value is found in array
-// Uses recursive binary search and returns true if found, false if not found
+// Uses recursive linear search and returns true if found, false if not found
 bool isMember(const int array[], int size, int value)
 {
-    int idx = binarySearch(array, 0, size - 1, value);
+    //int idx = binarySearch(array, 0, size - 1, value);
+    //return (idx != -1);
 
-    return (idx != -1);
+    int tstIdx = size - 1;
+
+    if (array[tstIdx] == value)
+        return true;        // found it!
+    else if (tstIdx < 0)
+        return false;       // searched the whole array and did not find
+    else
+        return isMember(array, tstIdx, value);
+    
 }
