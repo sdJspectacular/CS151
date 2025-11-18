@@ -47,7 +47,9 @@ long long factorial(int val)
     long long prod = 1;
 
     // Make sure that your answer doesn't go negative or is too small to make sense
-    if (val <= 0)
+    if (val == 0)
+        return 1;
+    else if (val <= 0)
         return 0;
     
     // Multiply up starting from 1
