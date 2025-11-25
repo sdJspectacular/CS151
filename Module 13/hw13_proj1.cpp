@@ -1,7 +1,7 @@
 /* hw13_proj1.cpp - String Bound Exceptions
  * Author:     Jack Marriott
  * Module:     13
- * Project:    W, Project 1
+ * Project:    HW, Project 1
  * Problem statement:  String bound exceptions
  *
  * Algorithm:
