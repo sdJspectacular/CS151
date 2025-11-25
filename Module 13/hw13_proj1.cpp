@@ -95,8 +95,8 @@ int main()
     cout << "String length: " << a.getVal().length() << "\n";
     cout << "Character at position 0: " << a[0] << "\n";
     cout << "Character at position 76: " << a[76] << "\n";
-    cout << "Character at position -1: " << a[-1] << "\n";
     cout << "Character at position 77: " << a[77] << "\n";
+    cout << "Character at position -1: " << a[-1] << "\n";
     cout << "\n";
 
     return 0;
