@@ -1,6 +1,6 @@
 /* hw12_proj1.cpp - Analysis of sorting algorithms
  * Author:     Jack Marriott
- * Module:     1
+ * Module:     12
  * Project:    HW, Project 1
  * Problem statement:  Measure the runtime of a sorting algorithm by counting comparisons
  *
