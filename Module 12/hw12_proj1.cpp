@@ -1,0 +1,148 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+// Class used to analyze the number of comparisons performed by a sorting algorithm.
+class AbstractSort
+{
+protected:
+    int compareBase = 0;
+
+public:
+    // Function compare is capable of comparing two array elements and tracks the
+    // number of comparisons performed
+    int compare(int arr[], int k, int m)
+    {
+        // Increment the number of times called
+        compareBase++;
+
+        if (arr[k] < arr[m])
+            return -1;
+        else if (arr[k] == arr[m])
+            return 0;
+        else
+            return 1;
+    }
+
+    // Pure virtual member sort function
+    // When overridden, will sort the array by calling the compare function to
+    // determine the relative order of pairs of numbers
+    virtual void sort(int arr[], int size) = 0;
+};
+
+// A subclass of AbstractSort which uses a simple sorting algorithm to implement the sort function
+class QuickSort : public AbstractSort
+{
+private:
+    // The class should have a counter which tracks the number of times the compare function
+    // is called while sorting the array
+    int comparisons = 0;
+
+public:
+    //  The class also should have a counter which tracks the number of times the compare
+    // function is called while sorting the array
+    void sort(int arr[], int size) override
+    {
+        // Implementation of the QuickSort algorithm
+        quickSort(arr, 0, size - 1);
+    }
+
+    // partition: implementation from Gaddis book, page 944
+    int partition(int arr[], int start, int end)
+    {
+        int pivotValue = arr[start];
+        int pivotPosn = start;
+
+        for (int pos = start + 1; pos <= end; pos++)
+        {
+            // Use the compare function to compare arr[pos] and pivotValue
+            comparisons++;
+            if (compare(arr, pos, start) < 0)
+            {
+                std::swap(arr[pivotPosn + 1], arr[pos]);
+                std::swap(arr[pivotPosn], arr[pivotPosn + 1]);
+                pivotPosn++;
+            }
+        }
+        return pivotPosn;
+    }
+
+    // quickSort: implementation from Gaddis book, page 944 
+    void quickSort(int arr[], int start, int end)
+    {
+        if (start < end)
+        {
+            // p is partitioning index, arr[p] is now at the right place
+            int p = partition(arr, start, end);
+
+            // Separately sort the elements before and after the pivot point
+            quickSort(arr, start, p - 1);  // Sort the left sub-array
+            quickSort(arr, p + 1, end); // Sort the right sub-array
+        }
+    }
+
+    // A member function which can be called after the sorting is done to retrieve
+    // the number of comparisons that were performed while sorting the array
+    int getComparisons() const
+    {
+        return comparisons;
+    }
+};
+
+int main()
+{
+    // Create two arrays, one with an unsorted set of 20 numbers, and
+    // the second with an unsorted set of numbers but of a different size
+
+    int arr1[20] = {0};
+    int arr2[25] = {0};
+
+    // Fill arr1 with random numbers
+    for (auto &e : arr1)
+    {
+        e = rand() % 100;
+    }
+
+    cout << "Array 1 before sorting: ";
+    for (auto e : arr1)
+    {
+        cout << e << " ";
+    }
+    cout << "\n\n";
+
+    QuickSort qsort1;
+    qsort1.sort(arr1, 20);
+
+    cout << "Array 1 after sorting: ";
+    for (auto e : arr1)
+    {
+        cout << e << " ";
+    }
+    cout << "\n\n";
+    cout << "Number of comparisons for Array 1: " << qsort1.getComparisons() << "\n\n";
+
+    // Fill arr2 with random numbers
+    for (auto &e : arr2)
+    {
+        e = rand() % 100;
+    }
+
+    cout << "\nArray 2 before sorting: ";
+    for (auto e : arr2)
+    {
+        cout << e << " ";
+    }
+    cout << "\n\n";
+
+    QuickSort qsort2;
+    qsort2.sort(arr2, 40);
+    cout << "Array 2 after sorting: ";
+    for (auto e : arr2)
+    {
+        cout << e << " ";
+    }
+    cout << "\n\n";
+    cout << "Number of comparisons for Array 2: " << qsort2.getComparisons() << "\n\n";
+
+    return 0;
+}
