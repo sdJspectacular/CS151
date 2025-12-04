@@ -335,17 +335,24 @@ bool LinkedList<T>::remove(T myData)
 {
     if (size == 0)
     {
+        // if list is empty, value is not found
         return false;
     }
     else
     {
+        // List is not empty
+
         Node<T> *current = head;
         Node<T> *prev = head;
         Node<T> *garbage = nullptr;
+
+        // Walk the list one node at a time
         for (int i = 0; i < size; ++i)
         {
+            // stop in the first node that the value is found
             if (current->data == myData)
             {
+                // set a pointer to the node that will be removed
                 garbage = current;
                 break;
             }
@@ -353,15 +360,23 @@ bool LinkedList<T>::remove(T myData)
             current = current->next;
         }
 
-        if(garbage)
+        // The node that will be removed
+        if (garbage)
         {
-            prev->next = current->next;
+            if (prev != head)
+                prev->next = current->next;
+            else // When removing the head node
+                head = current->next;
+
             delete garbage;
             --size;
             return true;
         }
         else
+        {
+            // Did not find the value
             return false;
+        }
     }
 }
 
@@ -371,6 +386,14 @@ bool LinkedList<T>::remove(T myData)
 template <typename T>
 T LinkedList<T>::removeAt(int index)
 {
+    try
+    {
+        if (size == 0) throw runtime_error("No nodes in the list");
+    }
+    catch (const runtime_error &e)
+    {
+        cerr << "Runtime error: " << e.what() << "\n";
+    }
 }
 
 // find the last index of a specific data element which appears more than once in the list
