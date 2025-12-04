@@ -386,14 +386,40 @@ bool LinkedList<T>::remove(T myData)
 template <typename T>
 T LinkedList<T>::removeAt(int index)
 {
-    try
+    // Empty list or invalid index
+    if ((index < 0) || (index >= size))
+        throw runtime_error("Invalid index");
+    
+    T exData;
+
+    if (index == 0)
     {
-        if (size == 0) throw runtime_error("No nodes in the list");
+        // Removing head node (list size >= 1 because of check above)
+        Node<T> *garbage = head;
+        exData = garbage->data;
+        head = head->next;
+        delete garbage;
     }
-    catch (const runtime_error &e)
+    else
     {
-        cerr << "Runtime error: " << e.what() << "\n";
+        Node<T> *current = head;
+        Node<T> *prev = head;
+        Node<T> *garbage = nullptr;
+
+        // Walk the list one node at a time
+        for (int i = 0; i < index; ++i)
+        {
+            prev = current;
+            current = current->next;
+        }
+
+        garbage = current;
+        prev->next = current->next;
+        exData = garbage->data;
+        delete garbage;
     }
+
+    return exData;
 }
 
 // find the last index of a specific data element which appears more than once in the list
