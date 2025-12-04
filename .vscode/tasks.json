@@ -7,9 +7,9 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
-                //"${fileDirname}/PString.cpp",
-                //"${fileDirname}/hw7proj1.cpp",
+                //"${file}",
+                "${fileDirname}/NumberList.cpp",
+                "${fileDirname}/ex1.cpp",
                 //"${fileDirname}/Lab7.cpp",
                 //"${fileDirname}/Animal.cpp",
                 //"${fileDirname}/Fox.cpp",
