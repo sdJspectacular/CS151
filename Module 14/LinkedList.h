@@ -17,6 +17,24 @@
  *
  *    Functions to be written are:
  *        display, remove, removeAt, lastIndexOf, contains, and set
+ *
+ *    Requirements:
+ *    1. Place these new functions at the bottom of the file.
+ *    2. This LinkList is generic, so each of your functions should be a template.
+ *    3. display the contents of the list on the console
+ *        - print "(null)" if the list is empty
+ *    4. remove a node with a specific data element (e.g., 25.0)
+ *       - return  false  if the element is not found,  true  if removed
+ *       - don't forget to delete the removed node
+ *    5. remove a node at a specific index or position in the list
+ *       - return the element removed if successful, throw and catch an exception if invalid location
+ *       - don't forget to delete the removed node
+ *    6. find the last index of a specific data element which appears more than once in the list
+ *       - return -1 if element is not found
+ *    7. determine if the list contains a specific data element
+ *       - return  true  if found,  false  if not found
+ *    8. modify or set the data value of a node at a specific index
+ *       - return the old element at that index (if replaced) or T( ) if unsuccessful
  */
 
 #pragma once
@@ -80,17 +98,19 @@ public:
     int getSize() const;
     bool isEmpty() const;
 
-    T removeFirst() throw(runtime_error); // remove an element or clear
-    T removeLast() throw(runtime_error);
+    // T removeFirst() throw(runtime_error);  // this is not allowed in C++17 and later
+    // T removeLast() throw(runtime_error);   // this is not allowed in c++17 and later
+    T removeFirst() noexcept(false); // indicates that the function can throw exceptions
+    T removeLast() noexcept(false);
     void clear();
 
     // Function prototypes to be written in this lab
-    bool contains(T myData) const;
-    int lastIndexOf(T myData) const;
+    void display() const;
     bool remove(T myData);
     T removeAt(int index);
+    int lastIndexOf(T myData) const;
+    bool contains(T myData) const;
     T set(int index, T myData);
-    void display() const;
 };
 
 /************************************
@@ -215,7 +235,7 @@ int LinkedList<T>::getSize() const
 
 // Remove first node from list
 template <typename T>
-T LinkedList<T>::removeFirst() throw(runtime_error)
+T LinkedList<T>::removeFirst() noexcept(false)
 {
     if (size == 0)
         throw runtime_error("No nodes in the list");
@@ -234,7 +254,7 @@ T LinkedList<T>::removeFirst() throw(runtime_error)
 
 // Remove last node from the list
 template <typename T>
-T LinkedList<T>::removeLast() throw(runtime_error)
+T LinkedList<T>::removeLast() noexcept(false)
 {
     if (size == 0)
     {
@@ -284,4 +304,92 @@ template <typename T>
 bool LinkedList<T>::isEmpty() const
 {
     return head == nullptr; // no nodes in list
+}
+
+// display the contents of the list on the console
+// print "(null)" if the list is empty
+template <typename T>
+void LinkedList<T>::display() const
+{
+    Node<T> *current = head;
+
+    if (size == 0)
+    {
+        cout << "(null)";
+    }
+    else
+    {
+        for (int i = 0; i < size; ++i)
+        {
+            cout << "(" << i << ", " << current->data << ") ";
+            current = current->next;
+        }
+    }
+}
+
+// remove a node with a specific data element (e.g., 25.0)
+// return  false  if the element is not found,  true  if removed
+// don't forget to delete the removed node
+template <typename T>
+bool LinkedList<T>::remove(T myData)
+{
+    if (size == 0)
+    {
+        return false;
+    }
+    else
+    {
+        Node<T> *current = head;
+        Node<T> *prev = head;
+        Node<T> *garbage = nullptr;
+        for (int i = 0; i < size; ++i)
+        {
+            if (current->data == myData)
+            {
+                garbage = current;
+                break;
+            }
+            prev = current;
+            current = current->next;
+        }
+
+        if(garbage)
+        {
+            prev->next = current->next;
+            delete garbage;
+            --size;
+            return true;
+        }
+        else
+            return false;
+    }
+}
+
+// remove a node at a specific index or position in the list
+//  return the element removed if successful, throw and catch an exception if invalid location
+//  don't forget to delete the removed node
+template <typename T>
+T LinkedList<T>::removeAt(int index)
+{
+}
+
+// find the last index of a specific data element which appears more than once in the list
+// return -1 if element is not found
+template <typename T>
+int LinkedList<T>::lastIndexOf(T myData) const
+{
+}
+
+// determine if the list contains a specific data element
+// return  true  if found,  false  if not found
+template <typename T>
+bool LinkedList<T>::contains(T myData) const
+{
+}
+
+// modify or set the data value of a node at a specific index
+// return the old element at that index (if replaced) or  T( )  if unsuccessful
+template <typename T>
+T LinkedList<T>::set(int index, T myData)
+{
 }
