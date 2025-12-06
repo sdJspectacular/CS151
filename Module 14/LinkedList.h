@@ -400,23 +400,31 @@ T LinkedList<T>::removeAt(int index)
         head = head->next;
         delete garbage;
     }
+    else if (index == (size - 1))
+    {
+        Node<T> *current = head;
+        Node<T> *prev = head;
+        while(current->next)
+        {
+            prev = current;
+            current = current->next;
+        }
+        exData = current->data;
+        prev->next = nullptr;
+        delete current;
+    }
     else
     {
         Node<T> *current = head;
         Node<T> *prev = head;
-        Node<T> *garbage = nullptr;
-
-        // Walk the list one node at a time
         for (int i = 0; i < index; ++i)
         {
             prev = current;
             current = current->next;
         }
-
-        garbage = current;
-        prev->next = current->next;
-        exData = garbage->data;
-        delete garbage;
+        exData = current->data;
+        prev->next = nullptr;
+        delete current;
     }
 
     return exData;
