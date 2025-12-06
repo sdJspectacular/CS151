@@ -311,19 +311,18 @@ bool LinkedList<T>::isEmpty() const
 template <typename T>
 void LinkedList<T>::display() const
 {
-    Node<T> *current = head;
-
-    if (size == 0)
+    if ((size == 0) || (head == nullptr))
     {
         cout << "(null)";
+        return;
     }
-    else
+
+    int i = 0;
+    Node<T> *current = head;
+    while (current)
     {
-        for (int i = 0; i < size; ++i)
-        {
-            cout << "(" << i << ", " << current->data << ") ";
-            current = current->next;
-        }
+        cout << "(" << i << ", " << current->data << ") ";
+        current = current->next;
     }
 }
 
