@@ -334,50 +334,39 @@ template <typename T>
 bool LinkedList<T>::remove(T myData)
 {
     if (size == 0)
+        return false; // if list is empty, value is not found
+
+    // Are we removing the head node?
+    if (head->data == myData)
     {
-        // if list is empty, value is not found
-        return false;
+        removeFirst();
+        return true;
     }
-    else
+
+    // Removing any other node
+    Node<T> *prev = head;
+    Node<T> *current = head->next;
+
+    // Walk the list
+    while (current != nullptr)
     {
-        // List is not empty
-
-        Node<T> *current = head;
-        Node<T> *prev = head;
-        Node<T> *garbage = nullptr;
-
-        // Walk the list one node at a time
-        for (int i = 0; i < size; ++i)
+        // Stop if we find the value
+        if (current->data == myData)
         {
-            // stop in the first node that the value is found
-            if (current->data == myData)
+            prev->next = current->next;
+            if (current == tail)
             {
-                // set a pointer to the node that will be removed
-                garbage = current;
-                break;
+                tail = prev;
             }
-            prev = current;
-            current = current->next;
-        }
-
-        // The node that will be removed
-        if (garbage)
-        {
-            if (prev != head)
-                prev->next = current->next;
-            else // When removing the head node
-                head = current->next;
-
-            delete garbage;
-            --size;
+            delete current; // delete the node to be removed
+            size--;
             return true;
         }
-        else
-        {
-            // Did not find the value
-            return false;
-        }
+        prev = current;
+        current = current->next;
     }
+
+    return false; // default return value if not found
 }
 
 // remove a node at a specific index or position in the list
@@ -389,44 +378,41 @@ T LinkedList<T>::removeAt(int index)
     // Empty list or invalid index
     if ((index < 0) || (index >= size))
         throw runtime_error("Invalid index");
-    
+
     T exData;
 
-    if (index == 0)
+    if (index == 0) // Remove head node
     {
         // Removing head node (list size >= 1 because of check above)
         Node<T> *garbage = head;
         exData = garbage->data;
         head = head->next;
         delete garbage;
+
+        // If list is empty, both head and tail should point to null
+        if (head == nullptr)
+            tail = nullptr;
     }
-    else if (index == (size - 1))
+    else // Remove all other nodes
     {
-        Node<T> *current = head;
         Node<T> *prev = head;
-        while(current->next)
-        {
-            prev = current;
-            current = current->next;
-        }
-        exData = current->data;
-        prev->next = nullptr;
-        delete current;
-    }
-    else
-    {
-        Node<T> *current = head;
-        Node<T> *prev = head;
-        for (int i = 0; i < index; ++i)
-        {
-            prev = current;
-            current = current->next;
-        }
-        exData = current->data;
-        prev->next = nullptr;
-        delete current;
+
+        // Walk up to to node preceding the one to be removed
+        for (int i = 0; i < (index - 1); i++)
+            prev = prev->next;
+
+        Node<T> *garbage = prev->next;
+        exData = garbage->data;
+        prev->next = garbage->next; // re-connect nodes
+        delete garbage;             // delete the node to be removed
+
+        // Update tail if we removed the last node
+        if (prev->next == nullptr)
+            tail = prev;
     }
 
+    // reduce size by 1
+    --size;
     return exData;
 }
 
@@ -435,6 +421,22 @@ T LinkedList<T>::removeAt(int index)
 template <typename T>
 int LinkedList<T>::lastIndexOf(T myData) const
 {
+    int idx = 0;
+    int indexOf = -1;
+
+    Node<T> *current = head;
+
+    // Walk the complete list
+    while (current != nullptr)
+    {
+        if (current->data == myData)
+            indexOf = idx; // Found it, grab the index
+
+        current = current->next;
+        idx++;
+    }
+
+    return indexOf;
 }
 
 // determine if the list contains a specific data element
@@ -442,11 +444,38 @@ int LinkedList<T>::lastIndexOf(T myData) const
 template <typename T>
 bool LinkedList<T>::contains(T myData) const
 {
+    Node<T> *current = head;
+    while (current != nullptr)
+    {
+        if (current->data == myData)
+            return true;
+
+        current = current->next;
+    }
+
+    return false;
 }
 
 // modify or set the data value of a node at a specific index
-// return the old element at that index (if replaced) or  T( )  if unsuccessful
+// return the old element at that index (if replaced) or T() if unsuccessful
 template <typename T>
 T LinkedList<T>::set(int index, T myData)
 {
+    // Validate index
+    if (index < 0 || index >= size)
+        return T(); // unsuccessful
+
+    // Walk to the specified index
+    Node<T> *current = head;
+    for (int i = 0; i < index; i++)
+        current = current->next;
+
+    // Save the old data
+    T oldData = current->data;
+
+    // Set the new data
+    current->data = myData;
+
+    // Return the old data
+    return oldData;
 }
