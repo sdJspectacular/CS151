@@ -1,4 +1,25 @@
-
+/* lab14.h - Generic class allowing representation of a linked list
+ * Author:     Jack Marriott
+ * Module:     14
+ * Project:    Lab
+ * Problem statement:  This file demonstrates a generic linked list class.
+ *                     The class itself is defined in LinkedList.h
+ *                     Demonstrate usage of functions: display(), remove(T myData), removeAt(int index),
+ *                     lastIndexOf(T myData), contains(T myData), set(int index, T myData).
+ *
+ * Algorithm:
+  1. Declare a new empty list and demonstrate display() and getSize()
+  2. Demonstrate what happens when removing from an empty list
+  3. Initialize the list with random values
+  4. Demonstrate display and getSize() for a non-empty list
+  5. Demonstrate remove
+  6. Demonstrate removing another element
+  7. Demonstrate removeAt with invalid index
+  8. Demonstrate removeAt head node
+  9. Demonstrate set at head node
+  10. Demonstrate lastIndexOf
+  11. Demonstrate contains with and without contained elements
+ */
 #include <iostream>
 #include <cstdlib>
 #include <stdexcept>
@@ -54,7 +75,7 @@ int main()
     list.display();cout << "\n";
     cout << "Size: " << list.getSize() << "\n\n";
 
-    // Demonstrate removeAt with a valid index
+    // Demonstrate removeAt with invalid index
     cout << "Remove an element at invalid index -1...\n";
     try
     {
