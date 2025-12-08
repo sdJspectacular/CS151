@@ -21,19 +21,19 @@
  *    Requirements:
  *    1. Place these new functions at the bottom of the file.
  *    2. This LinkList is generic, so each of your functions should be a template.
- *    3. display the contents of the list on the console
+ *    3. Add function display() to display the contents of the list on the console
  *        - print "(null)" if the list is empty
- *    4. remove a node with a specific data element (e.g., 25.0)
- *       - return  false  if the element is not found,  true  if removed
+ *    4. Add function remove(T myData) to remove a node with a specific data value
+ *       - return  false  if the element is not found,  true  if removed 
  *       - don't forget to delete the removed node
- *    5. remove a node at a specific index or position in the list
+ *    5. Add function removeAt(int index) to remove a node at a specific index or position in the list
  *       - return the element removed if successful, throw and catch an exception if invalid location
  *       - don't forget to delete the removed node
- *    6. find the last index of a specific data element which appears more than once in the list
+ *    6. Add function lastIndexOf(T myData) to find the last index of a specific data element which appears more than once in the list
  *       - return -1 if element is not found
- *    7. determine if the list contains a specific data element
+ *    7. Add function contains(T myData) to determine if the list contains a specific data element
  *       - return  true  if found,  false  if not found
- *    8. modify or set the data value of a node at a specific index
+ *    8. Add function set(int index, T myData) to modify or set the data value of a node at a specific index
  *       - return the old element at that index (if replaced) or T( ) if unsuccessful
  */
 
