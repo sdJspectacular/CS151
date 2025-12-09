@@ -321,7 +321,7 @@ void LinkedList<T>::display() const
     Node<T> *current = head;
     while (current)
     {
-        cout << "(" << i << ", " << current->data << ") ";
+        cout << "(" << i++ << ", " << current->data << ") ";
         current = current->next;
     }
 }

@@ -7,9 +7,9 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                //"${file}",
-                "${fileDirname}/LinkedList.cpp",
-                "${fileDirname}/hw14.cpp",
+                "${file}",
+                //"${fileDirname}/LinkedList.cpp",
+                //"${fileDirname}/hw14.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
