@@ -44,6 +44,18 @@ public:
     // 4. Create definitions for the constructor,  add,  and  isMember  functions
     void add(double value);
     bool isMember(double number) const;
+
+    // 5.  Modify the list class you created in the previous challenge to add a  print  member function
+    void print() const;
+
+    // Project 3: List Reverse
+    void reverse();
+
+    // Project 4: List Search
+     int search(double number) const;
+
+    // Project 5: Member insertion by position
+    void insert(double value, int pos);
 };
 
 
