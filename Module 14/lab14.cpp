@@ -109,9 +109,9 @@ int main()
     cout << "\nCheck if list contains value of 5...\n";
     bool found = list.contains(5);
     cout << "Contains 5: " << (found ? "true" : "false") << "\n";
-    cout << "\nCheck if list contains value of -99...\n";
-    found = list.contains(-99);
-    cout << "Contains -99: " << (found ? "true" : "false") << "\n";
+    cout << "\nCheck if list contains value of -50...\n";
+    found = list.contains(-50);
+    cout << "Contains -50: " << (found ? "true" : "false") << "\n";
 
     cout << "\n";
 
