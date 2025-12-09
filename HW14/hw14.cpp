@@ -9,6 +9,7 @@ int main()
     LinkedList list;
 
     // Add nodes 7.0, 8.0, and 9.0
+    cout << "Adding nodes 7.0, 8.0, and 9.0 to the empty list.\n";
     list.add(7.0);
     list.add(8.0);
     list.add(9.0);
@@ -20,5 +21,6 @@ int main()
     cout << "Test 7.0: " << (list.isMember(7.0) ? "true" : "false") << "\n";
     cout << "Test 5.0: " << (list.isMember(5.0) ? "true" : "false") << "\n";
     
+    cout << "\n";
     return 0;
 }

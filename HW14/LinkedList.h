@@ -46,14 +46,5 @@ public:
     bool isMember(double number) const;
 };
 
-LinkedList::~LinkedList()
-{
-    ListNode *current = head;
-    while (current != nullptr)
-    {
-        ListNode *nextNode = current->next;
-        delete current;
-        current = nextNode;
-    }
-}
+
 #endif
