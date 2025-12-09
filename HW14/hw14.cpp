@@ -1,3 +1,19 @@
+/* hw14.cpp - Linked List Operations
+ * Author:     Jack Marriott
+ * Module:     14
+ * Project:    HW, Projects 1-5
+ * Problem statement:  Test and demonstrate the LinkedList class with various member functions
+ *
+ * Algorithm:
+   1. Demo the LinkedList class by creating an object with the default constructor
+   2. Add nodes with values 7.0, 8.0, and 9.0 using the add function
+   3. Use the isMember function to check for the presence of values 9.0, 7.0, and 5.0
+   4. Print the contents of the list using the print function
+   5. Reverse the list using the reverse function and print the contents
+   6. Reverse the list again to restore original order and print the contents
+   7. Search for values 8.0, 7.0, and 10.0 using the search function and display their indices
+   8. Insert values at various positions (head, middle, end) using the insert function and print the list after each insertion
+*/
 #include <iostream>
 #include "LinkedList.h"
 
@@ -5,7 +21,7 @@ using namespace std;
 
 int main()
 {
-    // Create a  LinkedList  object using the default constructor
+    // Create a  LinkedList object using the default constructor
     LinkedList list;
 
     // Add nodes 7.0, 8.0, and 9.0

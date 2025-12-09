@@ -1,9 +1,17 @@
-/*
+/* LinkedList.h - Linked List Operations
+ * Author:     Jack Marriott
+ * Module:     14
+ * Project:    HW, Projects 1-5
+ * Problem statement:  Test and demonstrate the LinkedList class with various member functions
+ *
+ * Algorithm:
    1. Project 1: design a linked list class with two member functions: add and isMember
       - The add function adds a new node containing a double value to the head of the list
       - The isMember function checks whether a given double value is present in the list
-
-
+    2. Project 2: add a print member function to display the contents of the list
+    3. Project 3: add a reverse member function to reverse the order of the nodes in the list
+    4. Project 4: add a search member function to find the index of a given value in the list
+    5. Project 5: add an insert member function to insert a new node at a specified position in the list
 */
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
