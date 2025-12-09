@@ -7,15 +7,9 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
-                //"${fileDirname}/NumberList.cpp",
-                //"${fileDirname}/ex1.cpp",
-                //"${fileDirname}/Lab7.cpp",
-                //"${fileDirname}/Animal.cpp",
-                //"${fileDirname}/Fox.cpp",
-                //"${fileDirname}/Owl.cpp",
-                //"${fileDirname}/EncryptableString.cpp",
-                //"${fileDirname}/hw7proj2.cpp",
+                //"${file}",
+                "${fileDirname}/LinkedList.cpp",
+                "${fileDirname}/hw14.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

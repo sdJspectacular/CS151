@@ -5,18 +5,24 @@
 
 
 */
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
+
 #include <iostream>
 
 using namespace std;
 
-// Definition of the LinkedList class based on Gaddis book, page 1149
+// Definition of the LinkedList class based on Gaddis book, page 1135
+// 1. Create a new class  LinkedList.h
 class LinkedList
 {
 private:
+// 2. Add a structure  ListNode  from the textbook
     struct ListNode
     {
         double value;
         ListNode *next;
+
         // Constructor
         ListNode(double value1, ListNode *next1 = nullptr)
         {
@@ -24,13 +30,18 @@ private:
             next = next1;
         }
     };
+    // 3. Add a LinkNode pointer named  head
     ListNode *head;
 public:
+    // 6. In the constructor, initialize the  head  variable to  nullptr
     LinkedList()
     {
         head = nullptr;
     }
+
     ~LinkedList();
+
+    // 4. Create definitions for the constructor,  add,  and  isMember  functions
     void add(double value);
     bool isMember(double number) const;
 };
@@ -45,39 +56,4 @@ LinkedList::~LinkedList()
         current = nextNode;
     }
 }
-
-// The add function adds a new node containing <value> to the head of the list
-void LinkedList::add(double value)
-{
-    // Create the new node
-    ListNode *newNode = new ListNode(value);
-
-    if (head == nullptr)
-    {
-        // Add to head if list is empty
-        head = newNode;
-    }
-    else
-    {
-        // Link the new node to the current head
-        newNode->next = head;
-        head = newNode;
-    }
-}
-
-bool LinkedList::isMember(double number) const
-{
-    ListNode *current = head;
-
-    // Walk the list
-    while (current != nullptr)
-    {
-        if (current->value == number)
-        {
-            return true;  // found it
-        }
-        current = current->next;
-    }
-
-    return false;  // did not find it
-}
+#endif
